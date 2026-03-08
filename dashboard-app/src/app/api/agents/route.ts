@@ -1,28 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { auth } from "@clerk/nextjs/server";
+import { getOrgScopedClient, createServerClient } from "@/lib/supabase";
 
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+/**
+ * Resolve the Clerk orgId to the brand UUID.
+ * Uses the service role client (bypasses RLS) for the lookup.
+ */
+async function resolveBrandId(orgId: string): Promise<string | null> {
+  const client = createServerClient();
+  const { data } = await client
+    .from("brands")
+    .select("id")
+    .eq("clerk_org_id", orgId)
+    .single();
+  return data?.id ?? null;
 }
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const brandId = searchParams.get("brand_id");
-    const limit = parseInt(searchParams.get("limit") ?? "50", 10);
-    const status = searchParams.get("status");
+    const { orgId } = await auth();
 
-    if (!brandId) {
+    if (!orgId) {
       return NextResponse.json(
-        { error: "Missing required query param: brand_id" },
-        { status: 400 }
+        { error: "Unauthorized — no organization context" },
+        { status: 401 }
       );
     }
 
-    const supabase = getSupabase();
+    const brandId = await resolveBrandId(orgId);
+    if (!brandId) {
+      return NextResponse.json(
+        { error: "Brand not found for this organization" },
+        { status: 404 }
+      );
+    }
+
+    const { searchParams } = new URL(req.url);
+    const limit = parseInt(searchParams.get("limit") ?? "50", 10);
+    const status = searchParams.get("status");
+
+    const supabase = await getOrgScopedClient(orgId);
     let query = supabase
       .from("agent_events")
       .select("*")
@@ -44,7 +61,11 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    return NextResponse.json({ events: data, count: data?.length ?? 0 });
+    return NextResponse.json({
+      events: data,
+      count: data?.length ?? 0,
+      brandId,
+    });
   } catch (error) {
     console.error("Agents GET error:", error);
     return NextResponse.json(
@@ -56,24 +77,38 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { brand_id, agent_name, event_type, payload } = body;
+    const { orgId } = await auth();
 
-    if (!brand_id || !agent_name || !event_type) {
+    if (!orgId) {
       return NextResponse.json(
-        {
-          error:
-            "Missing required fields: brand_id, agent_name, event_type",
-        },
+        { error: "Unauthorized — no organization context" },
+        { status: 401 }
+      );
+    }
+
+    const brandId = await resolveBrandId(orgId);
+    if (!brandId) {
+      return NextResponse.json(
+        { error: "Brand not found for this organization" },
+        { status: 404 }
+      );
+    }
+
+    const body = await req.json();
+    const { agent_name, event_type, payload } = body;
+
+    if (!agent_name || !event_type) {
+      return NextResponse.json(
+        { error: "Missing required fields: agent_name, event_type" },
         { status: 400 }
       );
     }
 
-    const supabase = getSupabase();
+    const supabase = await getOrgScopedClient(orgId);
     const { data, error } = await supabase
       .from("agent_events")
       .insert({
-        brand_id,
+        brand_id: brandId,
         agent_name,
         event_type,
         payload: payload ?? {},

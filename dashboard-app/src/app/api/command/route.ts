@@ -1,13 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { auth } from "@clerk/nextjs/server";
 import Anthropic from "@anthropic-ai/sdk";
-
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
+import { getOrgScopedClient, createServerClient } from "@/lib/supabase";
 
 function getAnthropic() {
   return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
@@ -15,38 +9,48 @@ function getAnthropic() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, brandId } = await req.json();
+    const { orgId } = await auth();
 
-    if (!message || !brandId) {
+    if (!orgId) {
       return NextResponse.json(
-        { error: "Missing required fields: message, brandId" },
+        { error: "Unauthorized — no organization context" },
+        { status: 401 }
+      );
+    }
+
+    const { message } = await req.json();
+
+    if (!message) {
+      return NextResponse.json(
+        { error: "Missing required field: message" },
         { status: 400 }
       );
     }
 
-    const supabase = getSupabase();
-    const anthropic = getAnthropic();
-
-    // Fetch brand info
-    const { data: brand, error: brandError } = await supabase
+    // Resolve org to brand
+    const serverClient = createServerClient();
+    const { data: brand, error: brandError } = await serverClient
       .from("brands")
       .select("*")
-      .eq("id", brandId)
+      .eq("clerk_org_id", orgId)
       .single();
 
-    if (brandError) {
-      console.error("Error fetching brand:", brandError);
+    if (brandError || !brand) {
       return NextResponse.json(
-        { error: "Brand not found" },
+        { error: "Brand not found for this organization" },
         { status: 404 }
       );
     }
+
+    // Get org-scoped client for subsequent queries
+    const supabase = await getOrgScopedClient(orgId);
+    const anthropic = getAnthropic();
 
     // Fetch recent agent events for context
     const { data: recentEvents } = await supabase
       .from("agent_events")
       .select("id, agent_name, event_type, payload, created_at")
-      .eq("brand_id", brandId)
+      .eq("brand_id", brand.id)
       .order("created_at", { ascending: false })
       .limit(10);
 
@@ -113,7 +117,11 @@ When responding:
       }
     }
 
-    return NextResponse.json({ message: responseMessage, actions });
+    return NextResponse.json({
+      message: responseMessage,
+      actions,
+      brandId: brand.id,
+    });
   } catch (error) {
     console.error("Command API error:", error);
     return NextResponse.json(
