@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(mkdir:*)",
+      "Bash(wc:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(wmic logicaldisk:*)",
+      "Bash(npm cache:*)",
+      "Bash(pip cache:*)",
+      "Bash(powershell:*)",
+      "Bash(echo EXIT: $?:*)",
+      "Bash(rm:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next:*)",
+      "Bash(vercel:*)"
+    ]
+  }
+}

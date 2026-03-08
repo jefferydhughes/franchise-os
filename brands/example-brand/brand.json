@@ -1,0 +1,47 @@
+{
+  "name": "Skill Samurai",
+  "slug": "skill-samurai",
+  "domain": "os.skillsamurai.com",
+  "status": "active",
+  "colors": {
+    "primary": "#1E40AF",
+    "secondary": "#1E293B",
+    "accent": "#F59E0B"
+  },
+  "voice_tone": "Professional, empowering, education-focused.",
+  "programs": [
+    "after-school STEM",
+    "holiday camps",
+    "birthday parties",
+    "school workshops"
+  ],
+  "royalty_rate": 0.07,
+  "platform_fee": 0.015,
+  "ideal_persona": "teacher",
+  "territory_rules": {
+    "min_population": 50000,
+    "max_radius_km": 15,
+    "min_school_density": 10,
+    "max_units_per_territory": 3
+  },
+  "onboarding_checklist": [
+    "territory_assignment",
+    "document_signing",
+    "training_schedule",
+    "system_access",
+    "marketing_setup",
+    "location_setup",
+    "soft_launch",
+    "grand_opening"
+  ],
+  "messaging": {
+    "slack_enabled": true,
+    "sms_enabled": true,
+    "whatsapp_enabled": false
+  },
+  "integrations": {
+    "clerk_org_id": null,
+    "twilio_phone": null,
+    "slack_webhook_url": null
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "version": "1.0",
+  "max_chain_depth": 10,
+  "max_concurrent_agents": 10,
+  "default_cooldown_seconds": 60,
+  "rules": [
+    {
+      "rule_id": "dispatch_market_opportunity",
+      "trigger_event": "traffic.heatmap.updated",
+      "target_agent": "MARKET_OPPORTUNITY_AGENT",
+      "model_tier": "strategic",
+      "priority": "high",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true", "agent.enabled == true"]
+    },
+    {
+      "rule_id": "dispatch_pattern_on_traffic",
+      "trigger_event": "traffic.heatmap.updated",
+      "target_agent": "PATTERN_DETECTION_AGENT",
+      "model_tier": "strategic",
+      "priority": "normal",
+      "cooldown_seconds": 600,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_territory_on_opportunity",
+      "trigger_event": "market.opportunity.detected",
+      "target_agent": "TERRITORY_INTELLIGENCE_AGENT",
+      "model_tier": "operational",
+      "priority": "high",
+      "cooldown_seconds": 120,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_initiative_on_opportunity",
+      "trigger_event": "market.opportunity.detected",
+      "target_agent": "INITIATIVE_AGENT",
+      "model_tier": "worker",
+      "priority": "high",
+      "cooldown_seconds": 120,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_cro_on_opportunity",
+      "trigger_event": "market.opportunity.detected",
+      "target_agent": "CRO_AGENT",
+      "model_tier": "strategic",
+      "priority": "normal",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_cmo_on_opportunity",
+      "trigger_event": "market.opportunity.detected",
+      "target_agent": "CMO_AGENT",
+      "model_tier": "strategic",
+      "priority": "normal",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_lead_intelligence",
+      "trigger_event": "lead.created",
+      "target_agent": "LEAD_INTELLIGENCE_AGENT",
+      "model_tier": "operational",
+      "priority": "high",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_lead_reply",
+      "trigger_event": "lead.replied",
+      "target_agent": "LEAD_INTELLIGENCE_AGENT",
+      "model_tier": "operational",
+      "priority": "high",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_sales_pipeline_on_score",
+      "trigger_event": "lead.scored",
+      "target_agent": "SALES_PIPELINE_AGENT",
+      "model_tier": "operational",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_sales_pipeline_on_discovery",
+      "trigger_event": "discovery.call.completed",
+      "target_agent": "SALES_PIPELINE_AGENT",
+      "model_tier": "operational",
+      "priority": "high",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_onboarding",
+      "trigger_event": "franchise.sold",
+      "target_agent": "ONBOARDING_AGENT",
+      "model_tier": "operational",
+      "priority": "critical",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_coo_on_sale",
+      "trigger_event": "franchise.sold",
+      "target_agent": "COO_AGENT",
+      "model_tier": "strategic",
+      "priority": "high",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_coaching_on_performance",
+      "trigger_event": "unit.performance.updated",
+      "target_agent": "COACHING_AGENT",
+      "model_tier": "operational",
+      "priority": "normal",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_pattern_on_performance",
+      "trigger_event": "unit.performance.updated",
+      "target_agent": "PATTERN_DETECTION_AGENT",
+      "model_tier": "strategic",
+      "priority": "low",
+      "cooldown_seconds": 600,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_coo_on_performance_drop",
+      "trigger_event": "unit.performance_drop",
+      "target_agent": "COO_AGENT",
+      "model_tier": "strategic",
+      "priority": "high",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_ceo_on_performance_drop",
+      "trigger_event": "unit.performance_drop",
+      "target_agent": "CEO_AGENT",
+      "model_tier": "strategic",
+      "priority": "normal",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_content_strategy",
+      "trigger_event": "campaign.approved",
+      "target_agent": "CONTENT_STRATEGY_AGENT",
+      "model_tier": "operational",
+      "priority": "high",
+      "cooldown_seconds": 60,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_landing_page",
+      "trigger_event": "landing_page.requested",
+      "target_agent": "LANDING_PAGE_AGENT",
+      "model_tier": "worker",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_email",
+      "trigger_event": "email_campaign.requested",
+      "target_agent": "EMAIL_AGENT",
+      "model_tier": "worker",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_email_followup",
+      "trigger_event": "followup.requested",
+      "target_agent": "EMAIL_AGENT",
+      "model_tier": "worker",
+      "priority": "high",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_social_content",
+      "trigger_event": "social_campaign.requested",
+      "target_agent": "SOCIAL_CONTENT_AGENT",
+      "model_tier": "worker",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_campaign_on_landing_page",
+      "trigger_event": "landing_page.generated",
+      "target_agent": "CAMPAIGN_AGENT",
+      "model_tier": "operational",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_campaign_on_email",
+      "trigger_event": "email_campaign.generated",
+      "target_agent": "CAMPAIGN_AGENT",
+      "model_tier": "operational",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_campaign_on_initiative",
+      "trigger_event": "initiative.created",
+      "target_agent": "CAMPAIGN_AGENT",
+      "model_tier": "operational",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_learning_on_launch",
+      "trigger_event": "campaign.sequence.launched",
+      "target_agent": "LEARNING_AGENT",
+      "model_tier": "operational",
+      "priority": "low",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_learning_on_review",
+      "trigger_event": "initiative.review.scheduled",
+      "target_agent": "LEARNING_AGENT",
+      "model_tier": "operational",
+      "priority": "normal",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_memory_curator_on_pattern",
+      "trigger_event": "pattern.detected",
+      "target_agent": "MEMORY_CURATOR_AGENT",
+      "model_tier": "worker",
+      "priority": "low",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_memory_curator_on_learning",
+      "trigger_event": "learning.captured",
+      "target_agent": "MEMORY_CURATOR_AGENT",
+      "model_tier": "worker",
+      "priority": "low",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_ceo_daily",
+      "trigger_event": "daily.system.report",
+      "target_agent": "CEO_AGENT",
+      "model_tier": "strategic",
+      "priority": "normal",
+      "cooldown_seconds": 3600,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_report_daily",
+      "trigger_event": "daily.system.report",
+      "target_agent": "REPORT_AGENT",
+      "model_tier": "worker",
+      "priority": "normal",
+      "cooldown_seconds": 3600,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_ceo_weekly",
+      "trigger_event": "weekly.system.summary.generated",
+      "target_agent": "CEO_AGENT",
+      "model_tier": "strategic",
+      "priority": "normal",
+      "cooldown_seconds": 86400,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_report_weekly",
+      "trigger_event": "weekly.system.summary.generated",
+      "target_agent": "REPORT_AGENT",
+      "model_tier": "worker",
+      "priority": "normal",
+      "cooldown_seconds": 86400,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_cmo_on_campaign_performance",
+      "trigger_event": "campaign.performance",
+      "target_agent": "CMO_AGENT",
+      "model_tier": "strategic",
+      "priority": "normal",
+      "cooldown_seconds": 300,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_initiative_on_recommendation",
+      "trigger_event": "initiative.recommended",
+      "target_agent": "INITIATIVE_AGENT",
+      "model_tier": "worker",
+      "priority": "high",
+      "cooldown_seconds": 60,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_territory_on_candidate_request",
+      "trigger_event": "candidate.requests_territory",
+      "target_agent": "TERRITORY_INTELLIGENCE_AGENT",
+      "model_tier": "operational",
+      "priority": "high",
+      "cooldown_seconds": 0,
+      "preconditions": ["brand.active == true"]
+    },
+    {
+      "rule_id": "dispatch_pattern_on_campaign_launch",
+      "trigger_event": "campaign.sequence.launched",
+      "target_agent": "PATTERN_DETECTION_AGENT",
+      "model_tier": "strategic",
+      "priority": "low",
+      "cooldown_seconds": 600,
+      "preconditions": ["brand.active == true"]
+    }
+  ]
+}

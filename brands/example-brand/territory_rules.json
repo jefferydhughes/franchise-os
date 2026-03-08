@@ -1,0 +1,33 @@
+{
+  "brand": "skill-samurai",
+  "scoring_weights": {
+    "population": 0.25,
+    "median_income": 0.20,
+    "competitor_density": 0.20,
+    "market_saturation": 0.20,
+    "school_density": 0.15
+  },
+  "thresholds": {
+    "min_population": 50000,
+    "min_median_income": 55000,
+    "max_radius_km": 15,
+    "min_school_density": 10,
+    "max_units_per_territory": 3,
+    "min_score_to_open": 65,
+    "grade_boundaries": {
+      "A": 85,
+      "B": 70,
+      "C": 55,
+      "D": 0
+    }
+  },
+  "exclusion_zones": {
+    "min_distance_between_units_km": 8,
+    "blocked_regions": []
+  },
+  "auto_assign_rules": {
+    "max_territories_per_franchisee": 2,
+    "reservation_period_days": 30,
+    "require_approval_above_grade": "A"
+  }
+}

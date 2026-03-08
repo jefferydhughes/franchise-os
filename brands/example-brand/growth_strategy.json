@@ -1,0 +1,48 @@
+{
+  "brand": "skill-samurai",
+  "fiscal_year": "2026",
+  "targets": {
+    "new_units": 12,
+    "territories_scored": 50,
+    "leads_generated": 2000,
+    "conversion_rate_target": 0.035,
+    "avg_time_to_close_days": 90
+  },
+  "priority_markets": [
+    {
+      "region": "Texas",
+      "cities": ["Dallas", "Houston", "Austin"],
+      "priority": "high"
+    },
+    {
+      "region": "Florida",
+      "cities": ["Tampa", "Orlando", "Miami"],
+      "priority": "high"
+    },
+    {
+      "region": "Arizona",
+      "cities": ["Phoenix", "Scottsdale"],
+      "priority": "medium"
+    },
+    {
+      "region": "California",
+      "cities": ["San Diego", "Sacramento"],
+      "priority": "medium"
+    }
+  ],
+  "channels": [
+    "google_ads",
+    "facebook",
+    "linkedin",
+    "franchise_portals",
+    "referral_program"
+  ],
+  "budget_allocation": {
+    "digital_ads": 0.40,
+    "content_marketing": 0.20,
+    "events_tradeshows": 0.15,
+    "referral_incentives": 0.10,
+    "pr_media": 0.10,
+    "reserve": 0.05
+  }
+}
