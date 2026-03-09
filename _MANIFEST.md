@@ -1,7 +1,7 @@
 # FranchiseOS -- Project Manifest
 
 > Auto-generated manifest reflecting the current state of the monorepo.
-> Last updated: 2026-03-08
+> Last updated: 2026-03-08 (agent souls + memory subsystems)
 
 ---
 
@@ -14,9 +14,9 @@
 | territory-engine | Spec + scorer | territory-scorer.ts + heatmap engine spec |
 | expansion-radar | Spec + engine | radar-engine.ts + expansion radar spec |
 | initiative-engine | Spec only | INITIATIVE_ENGINE_SPEC.md |
-| memory | 1 TS file | pgvector-free Supabase memory index |
+| memory | 4 TS files | pgvector-free memory index + brand-memory, decision-logs, platform-intelligence |
 | messaging | 3 gateways | Slack, SMS (Twilio), WhatsApp gateway stubs |
-| swarm | 20 agents + 36 rules | Agent markdown configs + dispatch-rules.json |
+| swarm | 20 soul agents + 36 rules | Full personality agents (287-451 lines each) + dispatch-rules.json |
 | scripts | 2 scripts | start-swarm.ts, bootstrap-brand.ts |
 | supabase | Migration pushed | 1 initial migration, config.toml, linked to project |
 | brands | 2 brands | example-brand (6 files), skill-samurai (6 files) |
@@ -181,6 +181,9 @@ templates/marketing-push.json        — Marketing push initiative template
 
 ```
 index.ts                             — Memory layer (pgvector-free Supabase storage + retrieval)
+brand-memory/index.ts                — Per-brand scoped knowledge store (voice, campaign, market, competitor)
+decision-logs/index.ts               — Structured decision tracking with outcome recording
+platform-intelligence/index.ts       — Cross-brand pattern detection and system-level insights
 ```
 
 ### messaging/
@@ -222,26 +225,26 @@ playbook-optimizer.ts                — Self-improving playbook loop
 memory-middleware.ts                 — Agent memory context injection middleware
 scenarios/opportunity-auto-response.ts — Dallas scenario auto-response pipeline
 
-agents/ceo.md                        — CEO Agent — strategic oversight, board reports
-agents/cro.md                        — CRO Agent — revenue growth, pipeline strategy
-agents/coo.md                        — COO Agent — operations, unit performance
-agents/cmo.md                        — CMO Agent — marketing strategy, campaign oversight
-agents/market-opportunity.md         — Market Opportunity Agent — detects expansion opportunities
-agents/territory-intelligence.md     — Territory Intelligence Agent — scores and ranks territories
-agents/lead-intelligence.md          — Lead Intelligence Agent — enriches and scores leads
-agents/sales-pipeline.md             — Sales Pipeline Agent — manages deal stages
-agents/campaign.md                   — Campaign Agent — orchestrates multi-channel campaigns
-agents/content-strategy.md           — Content Strategy Agent — plans content calendar
-agents/onboarding.md                 — Onboarding Agent — guides new franchisee setup
-agents/coaching.md                   — Coaching Agent — performance coaching for units
-agents/memory-curator.md             — Memory Curator Agent — manages institutional memory
-agents/pattern-detection.md          — Pattern Detection Agent — finds cross-brand patterns
-agents/learning.md                   — Learning Agent — captures and applies learnings
-agents/landing-page.md               — Landing Page Agent — generates franchise landing pages
-agents/email.md                      — Email Agent — creates email campaigns and followups
-agents/social-content.md             — Social Content Agent — generates social media content
-agents/report.md                     — Report Agent — daily/weekly report generation
-agents/initiative.md                 — Initiative Agent — creates and tracks initiatives
+agents/ceo.md                        — CEO Agent (309 lines) — strategic oversight, soul personality
+agents/cro.md                        — CRO Agent (307 lines) — revenue engine, soul personality
+agents/coo.md                        — COO Agent (332 lines) — operational backbone, soul personality
+agents/cmo.md                        — CMO Agent (327 lines) — brand and growth voice, soul personality
+agents/market-opportunity.md         — Market Opportunity Agent (309 lines) — geographic scout, soul personality
+agents/territory-intelligence.md     — Territory Intelligence Agent (301 lines) — geographic strategist, soul personality
+agents/lead-intelligence.md          — Lead Intelligence Agent (300 lines) — lead scoring specialist, soul personality
+agents/sales-pipeline.md             — Sales Pipeline Agent (444 lines) — deal progression engine, soul personality
+agents/campaign.md                   — Campaign Agent (310 lines) — multi-channel conductor, soul personality
+agents/content-strategy.md           — Content Strategy Agent (330 lines) — messaging architect, soul personality
+agents/onboarding.md                 — Onboarding Agent (315 lines) — franchisee welcome hand, soul personality
+agents/coaching.md                   — Coaching Agent (346 lines) — performance partner, soul personality
+agents/memory-curator.md             — Memory Curator Agent (316 lines) — knowledge keeper, soul personality
+agents/pattern-detection.md          — Pattern Detection Agent (405 lines) — cross-system detective, soul personality
+agents/learning.md                   — Learning Agent (451 lines) — scientific mind, soul personality
+agents/landing-page.md               — Landing Page Agent (287 lines) — conversion craftsman, soul personality
+agents/email.md                      — Email Agent (340 lines) — persuasive inbox voice, soul personality
+agents/social-content.md             — Social Content Agent (297 lines) — social storyteller, soul personality
+agents/report.md                     — Report Agent (378 lines) — executive communicator, soul personality
+agents/initiative.md                 — Initiative Agent (376 lines) — action catalyst, soul personality
 agents/skill-samurai-config.md       — Skill Samurai brand-specific agent overrides
 ```
 
