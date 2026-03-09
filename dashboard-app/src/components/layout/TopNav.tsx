@@ -6,9 +6,9 @@ import {
   Bell,
   ChevronDown,
   Building2,
-  User,
   Command,
 } from 'lucide-react';
+import { UserButton } from '@clerk/nextjs';
 
 export default function TopNav() {
   const [brandOpen, setBrandOpen] = useState(false);
@@ -77,10 +77,8 @@ export default function TopNav() {
           )}
         </button>
 
-        {/* User Avatar (placeholder for Clerk UserButton) */}
-        <button className="w-8 h-8 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-500 transition-colors">
-          <User className="w-4 h-4" />
-        </button>
+        {/* User: avatar + sign out + org switcher */}
+        <UserButton />
       </div>
     </header>
   );

@@ -20,7 +20,8 @@ async function resolveBrand(orgId: string | null | undefined) {
       .from("brands")
       .select("*")
       .eq("clerk_org_id", orgId)
-      .single();
+      .maybeSingle();
+    console.log("Brand lookup by org:", { orgId, data });
     if (data) return data;
   }
 
@@ -29,7 +30,8 @@ async function resolveBrand(orgId: string | null | undefined) {
     .from("brands")
     .select("*")
     .eq("slug", "skill-samurai")
-    .single();
+    .maybeSingle();
+  console.log("Brand lookup by slug:", { data });
 
   return data;
 }

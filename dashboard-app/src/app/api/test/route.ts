@@ -23,7 +23,9 @@ export async function GET() {
       .from('brands')
       .select('id, name, slug')
       .eq('slug', 'skill-samurai')
-      .single()
+      .maybeSingle()
+
+    console.log('Brand query result:', { data, error })
 
     results.supabase_ok = !error
     results.supabase_brand = data ?? null

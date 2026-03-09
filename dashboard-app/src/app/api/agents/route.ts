@@ -15,7 +15,8 @@ async function resolveBrandId(orgId: string | null | undefined): Promise<string 
       .from("brands")
       .select("id")
       .eq("clerk_org_id", orgId)
-      .single();
+      .maybeSingle();
+    console.log("Brand lookup by org:", { orgId, data });
     if (data?.id) return data.id;
   }
 
@@ -24,7 +25,8 @@ async function resolveBrandId(orgId: string | null | undefined): Promise<string 
     .from("brands")
     .select("id")
     .eq("slug", "skill-samurai")
-    .single();
+    .maybeSingle();
+  console.log("Brand lookup by slug:", { data });
 
   return data?.id ?? null;
 }

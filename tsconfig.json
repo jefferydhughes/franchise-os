@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "swarm/**/*",
+    "memory/**/*",
+    "territory-engine/**/*",
+    "expansion-radar/**/*",
+    "brand-engine/**/*",
+    "initiative-engine/**/*",
+    "messaging/**/*",
+    "scripts/**/*"
+  ],
+  "exclude": ["node_modules", "dashboard-app", "dist"]
+}

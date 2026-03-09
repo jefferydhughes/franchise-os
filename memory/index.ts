@@ -31,7 +31,7 @@ export interface MemoryRecord {
   brand_id: string;
   layer: MemoryLayer;
   content: string;
-  embedding: number[] | null;
+  embedding_text: string | null;
   metadata: Record<string, unknown>;
   created_at: string;
   updated_at: string;
@@ -132,21 +132,19 @@ export async function storeMemory(
   brandId: string,
   layer: MemoryLayer,
   content: string,
-  embedding?: number[]
+  title?: string
 ): Promise<MemoryRecord> {
   const supabase = getSupabaseClient();
-
-  const vector = embedding ?? (await generateEmbedding(content));
 
   const now = new Date().toISOString();
   const record = {
     brand_id: brandId,
     layer,
     content,
-    embedding: vector,
+    title: title ?? null,
+    embedding_text: content.slice(0, 500),
     metadata: {
       content_length: content.length,
-      has_real_embedding: !!embedding,
     },
     created_at: now,
     updated_at: now,
@@ -160,7 +158,7 @@ export async function storeMemory(
 
   if (error) {
     throw new Error(`Failed to store memory: ${error.message}`);
-}
+  }
 
   return data as MemoryRecord;
 }
@@ -279,8 +277,6 @@ export async function logDecision(
     .filter(Boolean)
     .join("\n");
 
-  const embedding = await generateEmbedding(content);
-
   const supabase = getSupabaseClient();
   const now = new Date().toISOString();
 
@@ -288,7 +284,7 @@ export async function logDecision(
     brand_id: brandId,
     layer: "decision-log" as MemoryLayer,
     content,
-    embedding,
+    embedding_text: content.slice(0, 500),
     metadata: {
       ...context,
       content_length: content.length,
@@ -305,7 +301,7 @@ export async function logDecision(
 
   if (error) {
     throw new Error(`Failed to log decision: ${error.message}`);
-}
+  }
 
   return data as MemoryRecord;
 }

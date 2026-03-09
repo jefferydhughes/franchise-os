@@ -1,9 +1,12 @@
 {
   "name": "franchise-os",
   "version": "1.0.0",
-  "description": "",
+  "description": "FranchiseOS agent swarm platform",
   "main": "index.js",
   "scripts": {
+    "dallas": "ts-node swarm/scenarios/opportunity-auto-response.ts",
+    "swarm": "ts-node scripts/start-swarm.ts",
+    "bootstrap": "ts-node scripts/bootstrap-brand.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +14,13 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@supabase/supabase-js": "^2.98.0"
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@supabase/supabase-js": "^2.98.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
   }
 }
