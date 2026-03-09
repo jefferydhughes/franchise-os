@@ -1,0 +1,42 @@
+{
+  "min_population": 50000,
+  "max_radius_km": 15,
+  "min_school_density": 3,
+  "overlap_policy": "exclusive",
+  "evaluation_criteria": [
+    {
+      "factor": "population_density",
+      "weight": 0.3,
+      "min_threshold": 1000,
+      "unit": "per_sq_km"
+    },
+    {
+      "factor": "median_household_income",
+      "weight": 0.25,
+      "min_threshold": 55000,
+      "unit": "usd"
+    },
+    {
+      "factor": "school_count",
+      "weight": 0.2,
+      "min_threshold": 3,
+      "unit": "count"
+    },
+    {
+      "factor": "competitor_density",
+      "weight": 0.15,
+      "max_threshold": 5,
+      "unit": "count"
+    },
+    {
+      "factor": "growth_rate",
+      "weight": 0.1,
+      "min_threshold": 0.01,
+      "unit": "percentage"
+    }
+  ],
+  "scoring": {
+    "min_score_to_approve": 70,
+    "max_score": 100
+  }
+}

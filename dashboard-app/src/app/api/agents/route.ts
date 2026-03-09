@@ -1,28 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { getOrgScopedClient, createServerClient } from "@/lib/supabase";
+import { createServerClient } from "@/lib/supabase";
 
 /**
- * Resolve the Clerk orgId to the brand UUID.
- * Uses the service role client (bypasses RLS) for the lookup.
+ * Resolve the brand for the current user.
+ * If the user belongs to a Clerk org, look up by clerk_org_id.
+ * Otherwise, fall back to the default brand (skill-samurai).
  */
-async function resolveBrandId(orgId: string): Promise<string | null> {
+async function resolveBrandId(orgId: string | null | undefined): Promise<string | null> {
   const client = createServerClient();
+
+  if (orgId) {
+    const { data } = await client
+      .from("brands")
+      .select("id")
+      .eq("clerk_org_id", orgId)
+      .single();
+    if (data?.id) return data.id;
+  }
+
+  // Fallback: default brand
   const { data } = await client
     .from("brands")
     .select("id")
-    .eq("clerk_org_id", orgId)
+    .eq("slug", "skill-samurai")
     .single();
+
   return data?.id ?? null;
 }
 
 export async function GET(req: NextRequest) {
   try {
-    const { orgId } = await auth();
+    const { userId, orgId } = await auth();
 
-    if (!orgId) {
+    if (!userId) {
       return NextResponse.json(
-        { error: "Unauthorized — no organization context" },
+        { error: "Unauthorized — please sign in" },
         { status: 401 }
       );
     }
@@ -30,7 +43,7 @@ export async function GET(req: NextRequest) {
     const brandId = await resolveBrandId(orgId);
     if (!brandId) {
       return NextResponse.json(
-        { error: "Brand not found for this organization" },
+        { error: "No brand found" },
         { status: 404 }
       );
     }
@@ -39,7 +52,7 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(searchParams.get("limit") ?? "50", 10);
     const status = searchParams.get("status");
 
-    const supabase = await getOrgScopedClient(orgId);
+    const supabase = createServerClient();
     let query = supabase
       .from("agent_events")
       .select("*")
@@ -56,7 +69,7 @@ export async function GET(req: NextRequest) {
     if (error) {
       console.error("Error fetching agent events:", error);
       return NextResponse.json(
-        { error: "Failed to fetch agent events" },
+        { error: "Failed to fetch agent events", detail: error.message },
         { status: 500 }
       );
     }
@@ -66,10 +79,11 @@ export async function GET(req: NextRequest) {
       count: data?.length ?? 0,
       brandId,
     });
-  } catch (error) {
-    console.error("Agents GET error:", error);
+  } catch (error: unknown) {
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error("Agents GET error:", errMsg);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", detail: errMsg },
       { status: 500 }
     );
   }
@@ -77,11 +91,11 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { orgId } = await auth();
+    const { userId, orgId } = await auth();
 
-    if (!orgId) {
+    if (!userId) {
       return NextResponse.json(
-        { error: "Unauthorized — no organization context" },
+        { error: "Unauthorized — please sign in" },
         { status: 401 }
       );
     }
@@ -89,7 +103,7 @@ export async function POST(req: NextRequest) {
     const brandId = await resolveBrandId(orgId);
     if (!brandId) {
       return NextResponse.json(
-        { error: "Brand not found for this organization" },
+        { error: "No brand found" },
         { status: 404 }
       );
     }
@@ -104,7 +118,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const supabase = await getOrgScopedClient(orgId);
+    const supabase = createServerClient();
     const { data, error } = await supabase
       .from("agent_events")
       .insert({
@@ -121,16 +135,17 @@ export async function POST(req: NextRequest) {
     if (error) {
       console.error("Error creating agent event:", error);
       return NextResponse.json(
-        { error: "Failed to create agent event" },
+        { error: "Failed to create agent event", detail: error.message },
         { status: 500 }
       );
     }
 
     return NextResponse.json({ event: data }, { status: 201 });
-  } catch (error) {
-    console.error("Agents POST error:", error);
+  } catch (error: unknown) {
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error("Agents POST error:", errMsg);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", detail: errMsg },
       { status: 500 }
     );
   }

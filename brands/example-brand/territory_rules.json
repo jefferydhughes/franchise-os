@@ -1,33 +1,206 @@
 {
   "brand": "skill-samurai",
-  "scoring_weights": {
-    "population": 0.25,
-    "median_income": 0.20,
-    "competitor_density": 0.20,
-    "market_saturation": 0.20,
-    "school_density": 0.15
-  },
-  "thresholds": {
-    "min_population": 50000,
-    "min_median_income": 55000,
-    "max_radius_km": 15,
-    "min_school_density": 10,
-    "max_units_per_territory": 3,
-    "min_score_to_open": 65,
+  "version": "2.1",
+  "last_updated": "2026-02-15",
+  "model": "exclusive_territory",
+  "scoring": {
+    "description": "Territory viability score calculated from weighted demographic and infrastructure factors. Minimum score of 65 required for approval.",
+    "weights": {
+      "school_density": 0.25,
+      "family_density": 0.20,
+      "household_income": 0.15,
+      "competitor_presence": 0.12,
+      "population_growth": 0.10,
+      "accessibility": 0.08,
+      "commercial_rent_index": 0.05,
+      "digital_connectivity": 0.03,
+      "community_infrastructure": 0.02
+    },
     "grade_boundaries": {
-      "A": 85,
-      "B": 70,
-      "C": 55,
-      "D": 0
-    }
+      "A": { "min": 85, "label": "Premium", "description": "High-demand territory with strong demographics and low competition. Priority allocation." },
+      "B": { "min": 70, "label": "Strong", "description": "Solid territory with good fundamentals. Standard allocation process." },
+      "C": { "min": 55, "label": "Developing", "description": "Emerging territory. May require higher initial marketing investment. Conditional approval." },
+      "D": { "min": 40, "label": "Marginal", "description": "Below threshold. Not recommended without exceptional circumstances." },
+      "F": { "min": 0, "label": "Declined", "description": "Territory does not meet minimum viability standards." }
+    },
+    "min_score_to_open": 65,
+    "conditional_approval_range": { "min": 55, "max": 64 }
+  },
+  "preferred_locations": {
+    "proximity_targets": [
+      {
+        "type": "primary_schools",
+        "ideal_count_in_zone": 8,
+        "minimum_count": 5,
+        "weight_factor": "high"
+      },
+      {
+        "type": "secondary_schools",
+        "ideal_count_in_zone": 4,
+        "minimum_count": 2,
+        "weight_factor": "medium"
+      },
+      {
+        "type": "community_centres",
+        "ideal_count_in_zone": 2,
+        "minimum_count": 1,
+        "weight_factor": "low"
+      },
+      {
+        "type": "shopping_centres",
+        "ideal_count_in_zone": 1,
+        "minimum_count": 0,
+        "weight_factor": "low"
+      }
+    ],
+    "site_characteristics": [
+      "Ground floor or first floor with street visibility",
+      "Minimum 80 sqm usable floor space",
+      "Dedicated drop-off zone or nearby parking",
+      "Within 500m of public transport stop",
+      "Suburban strip mall, community hub, or near-school location preferred",
+      "Avoid isolated industrial zones or adult-entertainment precincts"
+    ]
   },
   "exclusion_zones": {
-    "min_distance_between_units_km": 8,
-    "blocked_regions": []
+    "buffer_radius_km": 5,
+    "overlap_policy": "no_overlap",
+    "exceptions": [
+      {
+        "condition": "population_density_above",
+        "threshold_per_sqkm": 5000,
+        "reduced_buffer_km": 3,
+        "description": "In high-density urban areas, the buffer may be reduced to 3km with mutual franchisee consent."
+      },
+      {
+        "condition": "natural_boundary",
+        "description": "Rivers, highways, or other significant barriers may serve as territory boundaries even if within buffer distance."
+      }
+    ],
+    "prohibited_areas": [
+      "Within 500m of an existing Skill Samurai centre",
+      "Zones with active competitor exclusivity agreements",
+      "Areas with fewer than 3,000 households"
+    ]
+  },
+  "country_rules": {
+    "AU": {
+      "territory_type": "single_unit",
+      "default_radius_km": 5,
+      "min_households": 8000,
+      "min_schools_in_zone": 5,
+      "median_household_income_floor_aud": 85000,
+      "regulatory_requirements": [
+        "ABN registration",
+        "State-level WWCC clearance for all staff",
+        "Public liability insurance minimum $20M",
+        "Compliance with National Quality Framework where applicable"
+      ],
+      "priority_markets": [
+        { "city": "Sydney", "state": "NSW", "max_territories": 25 },
+        { "city": "Melbourne", "state": "VIC", "max_territories": 20 },
+        { "city": "Brisbane", "state": "QLD", "max_territories": 12 },
+        { "city": "Perth", "state": "WA", "max_territories": 10 },
+        { "city": "Adelaide", "state": "SA", "max_territories": 6 },
+        { "city": "Canberra", "state": "ACT", "max_territories": 4 },
+        { "city": "Gold Coast", "state": "QLD", "max_territories": 5 },
+        { "city": "Newcastle", "state": "NSW", "max_territories": 3 }
+      ],
+      "transfer_rules": {
+        "cooldown_months": 24,
+        "franchisor_right_of_first_refusal": true,
+        "transfer_fee_percent": 5,
+        "min_performance_for_transfer": "C_grade_or_above"
+      }
+    },
+    "CA": {
+      "territory_type": "single_unit",
+      "default_radius_km": 6,
+      "min_households": 10000,
+      "min_schools_in_zone": 6,
+      "median_household_income_floor_cad": 75000,
+      "regulatory_requirements": [
+        "Provincial franchise disclosure document (where required)",
+        "Criminal record check for all staff",
+        "Provincial business registration",
+        "Compliance with provincial child care regulations"
+      ],
+      "franchise_disclosure_provinces": ["AB", "BC", "MB", "NB", "ON", "PE"],
+      "priority_markets": [
+        { "city": "Toronto", "province": "ON", "max_territories": 15 },
+        { "city": "Vancouver", "province": "BC", "max_territories": 10 },
+        { "city": "Calgary", "province": "AB", "max_territories": 6 },
+        { "city": "Ottawa", "province": "ON", "max_territories": 4 },
+        { "city": "Edmonton", "province": "AB", "max_territories": 4 },
+        { "city": "Montreal", "province": "QC", "max_territories": 8 }
+      ],
+      "transfer_rules": {
+        "cooldown_months": 24,
+        "franchisor_right_of_first_refusal": true,
+        "transfer_fee_percent": 5,
+        "min_performance_for_transfer": "C_grade_or_above"
+      },
+      "notes": "Quebec requires French-language materials. Bilingual curriculum support available."
+    },
+    "EG": {
+      "territory_type": "master_franchise",
+      "default_radius_km": 8,
+      "min_households": 15000,
+      "min_schools_in_zone": 4,
+      "regulatory_requirements": [
+        "Egyptian Commercial Registry",
+        "Ministry of Education approval for supplementary education",
+        "Criminal background check for all staff",
+        "Local business licence"
+      ],
+      "master_franchise_terms": {
+        "master_fee_aud": 150000,
+        "sub_franchise_royalty_split": {
+          "master_franchisee": 0.04,
+          "franchisor": 0.04
+        },
+        "minimum_units_year_1": 2,
+        "minimum_units_year_3": 8,
+        "territory_scope": "national",
+        "exclusivity_review_years": 3
+      },
+      "priority_markets": [
+        { "city": "Cairo", "max_territories": 10 },
+        { "city": "Alexandria", "max_territories": 4 },
+        { "city": "Giza", "max_territories": 3 },
+        { "city": "New Cairo", "max_territories": 3 }
+      ],
+      "transfer_rules": {
+        "cooldown_months": 36,
+        "franchisor_right_of_first_refusal": true,
+        "transfer_fee_percent": 7,
+        "min_performance_for_transfer": "B_grade_or_above"
+      },
+      "notes": "Curriculum delivered in English with Arabic support materials. Master franchisee responsible for local regulatory compliance and instructor training."
+    }
   },
   "auto_assign_rules": {
-    "max_territories_per_franchisee": 2,
+    "max_territories_per_franchisee": 5,
     "reservation_period_days": 30,
     "require_approval_above_grade": "A"
+  },
+  "renewal_terms": {
+    "initial_term_years": 5,
+    "renewal_term_years": 5,
+    "max_renewals": 3,
+    "renewal_fee_aud": 10000,
+    "renewal_conditions": [
+      "Franchisee must be in good standing with no unresolved compliance issues",
+      "Territory must maintain minimum C-grade performance rating",
+      "Centre must pass operational audit within 6 months of renewal date",
+      "All outstanding fees must be paid in full",
+      "Franchisee must complete updated training requirements"
+    ]
+  },
+  "dispute_resolution": {
+    "first_step": "mediation",
+    "governing_law": "New South Wales, Australia",
+    "arbitration_body": "Australian Centre for International Commercial Arbitration",
+    "international_disputes": "International Chamber of Commerce arbitration rules apply for cross-border disputes"
   }
 }

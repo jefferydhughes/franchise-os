@@ -2,7 +2,6 @@
 -- Supabase: https://eggucsttihoxhxaaeiph.supabase.co
 -- Run in Supabase SQL Editor
 
-create extension if not exists "pgvector" with schema extensions;
 create extension if not exists "uuid-ossp" with schema extensions;
 
 -- ============================================================
@@ -153,7 +152,7 @@ create index idx_agent_events_created on public.agent_events(brand_id, created_a
 create index idx_agent_events_pending on public.agent_events(brand_id, status, created_at) where status = 'pending';
 
 -- ============================================================
--- MEMORY ENTRIES — with pgvector embeddings
+-- MEMORY ENTRIES — text-based embeddings (pgvector-free)
 -- ============================================================
 create table public.memory_entries (
   id uuid primary key default extensions.uuid_generate_v4(),
@@ -163,7 +162,7 @@ create table public.memory_entries (
   title text,
   content text not null,
   metadata jsonb not null default '{}'::jsonb,
-  embedding extensions.vector(1536),
+  embedding_text text,
   status text not null default 'active'
     check (status in ('active','archived','superseded')),
   created_at timestamptz not null default now(),
@@ -173,8 +172,6 @@ create index idx_memory_brand on public.memory_entries(brand_id);
 create index idx_memory_layer on public.memory_entries(brand_id, layer);
 create index idx_memory_status on public.memory_entries(brand_id, status);
 create index idx_memory_created on public.memory_entries(brand_id, created_at desc);
-create index idx_memory_embedding on public.memory_entries
-  using ivfflat (embedding extensions.vector_cosine_ops) with (lists = 100);
 
 -- ============================================================
 -- CAMPAIGNS
@@ -204,12 +201,14 @@ create index idx_campaigns_status on public.campaigns(brand_id, status);
 -- FUNCTIONS
 -- ============================================================
 
--- Vector similarity search
+-- Text-based memory search (replaces pgvector similarity search)
+-- Uses simple text matching on content. For production vector search,
+-- re-enable pgvector and restore the vector column + match_memories function.
 create or replace function match_memories(
-  query_embedding extensions.vector(1536),
+  query_text text,
   match_brand_id uuid,
   match_layer text default null,
-  match_threshold float default 0.7,
+  match_threshold float default 0.0,
   match_count int default 10
 )
 returns table (
@@ -220,13 +219,13 @@ language plpgsql as $$
 begin
   return query
   select me.id, me.brand_id, me.layer, me.title, me.content, me.metadata,
-    1 - (me.embedding <=> query_embedding) as similarity
+    1.0::float as similarity
   from public.memory_entries me
   where me.brand_id = match_brand_id
     and me.status = 'active'
     and (match_layer is null or me.layer = match_layer)
-    and 1 - (me.embedding <=> query_embedding) > match_threshold
-  order by me.embedding <=> query_embedding
+    and (query_text is null or me.content ilike '%' || query_text || '%')
+  order by me.created_at desc
   limit match_count;
 end;
 $$;

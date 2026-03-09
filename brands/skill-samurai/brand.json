@@ -1,0 +1,30 @@
+{
+  "name": "Skill Samurai",
+  "slug": "skill-samurai",
+  "colors": {
+    "primary": "#2563EB",
+    "secondary": "#1E40AF",
+    "accent": "#F59E0B",
+    "background": "#FFFFFF",
+    "text": "#111827"
+  },
+  "voice_tone": "professional, approachable, confident",
+  "territory_rules": {
+    "min_population": 50000,
+    "max_radius_km": 15,
+    "min_school_density": 3,
+    "exclusive": true
+  },
+  "royalty_rate": 0.06,
+  "onboarding_checklist": [
+    "Sign franchise agreement",
+    "Complete brand training",
+    "Set up location",
+    "Configure POS system",
+    "Launch local marketing",
+    "Grand opening event",
+    "First 30-day review"
+  ],
+  "created_at": "2026-03-08T23:16:23.066Z",
+  "active": true
+}

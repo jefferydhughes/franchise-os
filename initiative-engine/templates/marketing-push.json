@@ -1,0 +1,23 @@
+{
+  "type": "marketing_push",
+  "required_fields": ["campaign_name", "target_market", "budget"],
+  "default_agents": [
+    "CMO_AGENT",
+    "CAMPAIGN_AGENT",
+    "SOCIAL_CONTENT_AGENT",
+    "CONTENT_STRATEGY_AGENT"
+  ],
+  "estimated_duration_days": 7,
+  "success_metrics": [
+    "impressions",
+    "engagement_rate",
+    "brand_awareness_lift",
+    "social_follower_growth",
+    "website_traffic_increase"
+  ],
+  "rollback_steps": [
+    "pause_ad_spend",
+    "unpublish_content",
+    "notify_marketing_team"
+  ]
+}

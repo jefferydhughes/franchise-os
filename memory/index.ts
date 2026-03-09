@@ -179,15 +179,15 @@ export async function retrieveMemory(
 ): Promise<MemoryRecord[]> {
   const supabase = getSupabaseClient();
 
-  // If a query is provided, use vector similarity search
+  // If a query is provided, use text-based memory search
+  // V1: passes raw text to match_memories RPC (keyword search)
+  // V2: will use embeddings with pgvector cosine similarity
   if (query) {
-    const queryEmbedding = await generateEmbedding(query);
-
     const { data, error } = await supabase.rpc("match_memories", {
-      query_embedding: queryEmbedding,
+      query_text: query,
       match_brand_id: brandId,
       match_layer: layer,
-      match_threshold: 0.0, // Return all matches, sorted by similarity
+      match_threshold: 0.0, // Return all matches, sorted by relevance
       match_count: limit,
     });
 
@@ -227,12 +227,15 @@ export async function searchSimilarMemories(
 ): Promise<SimilarMemoryResult[]> {
   const supabase = getSupabaseClient();
 
-  const { data, error } = await supabase.rpc("match_memories", {
-    query_embedding: embedding,
-    match_brand_id: brandId,
-    match_threshold: threshold,
-    match_count: 50,
-  });
+  // V1: text-based search — convert embedding back to query text is not possible,
+  // so searchSimilarMemories uses a direct table query until pgvector is enabled
+  const { data, error } = await supabase
+    .from("memory_entries")
+    .select("*")
+    .eq("brand_id", brandId)
+    .eq("status", "active")
+    .order("created_at", { ascending: false })
+    .limit(50);
 
   if (error) {
     throw new Error(
@@ -327,4 +330,56 @@ export async function storeStrategicInsight(
 ): Promise<MemoryRecord> {
   const content = `Strategic Insight (from ${source.agent}): ${insight}`;
   return storeMemory(brandId, "strategic", content);
+}
+
+/**
+ * Retrieve the most recent memories for a brand within a specific layer.
+ *
+ * Returns records ordered by created_at descending, limited to the
+ * requested count.
+ */
+export async function getRecentMemories(
+  brandId: string,
+  layer: MemoryLayer,
+  limit: number = 10
+): Promise<MemoryRecord[]> {
+  return retrieveMemory(brandId, layer, undefined, limit);
+}
+
+/**
+ * Summarize recent memories for a brand within a specific layer.
+ *
+ * Currently concatenates the content of recent memories into a summary
+ * string. TODO: Replace with a Claude API call for real summarization
+ * once the Anthropic messages endpoint is integrated.
+ */
+export async function summarizeMemories(
+  brandId: string,
+  layer: MemoryLayer,
+  limit: number = 20
+): Promise<string> {
+  const memories = await getRecentMemories(brandId, layer, limit);
+
+  if (memories.length === 0) {
+    return `No memories found for brand ${brandId} in the "${layer}" layer.`;
+  }
+
+  // TODO: Call Claude for real summarization, e.g.:
+  //
+  // const response = await anthropic.messages.create({
+  //   model: 'claude-sonnet-4-20250514',
+  //   messages: [{
+  //     role: 'user',
+  //     content: `Summarize these ${layer} memories for brand ${brandId}:\n\n${memories.map(m => m.content).join('\n---\n')}`
+  //   }],
+  //   max_tokens: 500,
+  // });
+  // return response.content[0].text;
+
+  const header = `Summary of ${memories.length} recent "${layer}" memories for brand ${brandId}:`;
+  const body = memories
+    .map((m, i) => `${i + 1}. ${m.content}`)
+    .join("\n");
+
+  return `${header}\n\n${body}`;
 }

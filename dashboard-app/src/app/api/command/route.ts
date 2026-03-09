@@ -1,19 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import Anthropic from "@anthropic-ai/sdk";
-import { getOrgScopedClient, createServerClient } from "@/lib/supabase";
+import { createServerClient } from "@/lib/supabase";
 
 function getAnthropic() {
   return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 }
 
+/**
+ * Resolve the brand for the current user.
+ * If the user belongs to a Clerk org, look up the brand by clerk_org_id.
+ * Otherwise, fall back to the default brand (skill-samurai).
+ */
+async function resolveBrand(orgId: string | null | undefined) {
+  const supabase = createServerClient();
+
+  if (orgId) {
+    const { data } = await supabase
+      .from("brands")
+      .select("*")
+      .eq("clerk_org_id", orgId)
+      .single();
+    if (data) return data;
+  }
+
+  // Fallback: use the default brand
+  const { data } = await supabase
+    .from("brands")
+    .select("*")
+    .eq("slug", "skill-samurai")
+    .single();
+
+  return data;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { orgId } = await auth();
+    const { userId, orgId } = await auth();
 
-    if (!orgId) {
+    if (!userId) {
       return NextResponse.json(
-        { error: "Unauthorized — no organization context" },
+        { error: "Unauthorized — please sign in" },
         { status: 401 }
       );
     }
@@ -27,23 +54,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Resolve org to brand
-    const serverClient = createServerClient();
-    const { data: brand, error: brandError } = await serverClient
-      .from("brands")
-      .select("*")
-      .eq("clerk_org_id", orgId)
-      .single();
+    const brand = await resolveBrand(orgId);
 
-    if (brandError || !brand) {
+    if (!brand) {
       return NextResponse.json(
-        { error: "Brand not found for this organization" },
+        { error: "No brand found. Run the Supabase migration to seed the default brand." },
         { status: 404 }
       );
     }
 
-    // Get org-scoped client for subsequent queries
-    const supabase = await getOrgScopedClient(orgId);
+    const supabase = createServerClient();
     const anthropic = getAnthropic();
 
     // Fetch recent agent events for context
@@ -109,7 +129,6 @@ When responding:
         if (parsed.message) {
           responseMessage = parsed.message;
         } else {
-          // Remove the JSON block from the message text
           responseMessage = rawText.replace(/```json\s*[\s\S]*?```/, "").trim();
         }
       } catch {
@@ -122,10 +141,15 @@ When responding:
       actions,
       brandId: brand.id,
     });
-  } catch (error) {
-    console.error("Command API error:", error);
+  } catch (error: unknown) {
+    const errMsg = error instanceof Error ? error.message : String(error);
+    const errStack = error instanceof Error ? error.stack : undefined;
+    console.error("Command API error:", errMsg, errStack);
     return NextResponse.json(
-      { error: "Failed to process command" },
+      {
+        error: "Failed to process command",
+        detail: errMsg,
+      },
       { status: 500 }
     );
   }

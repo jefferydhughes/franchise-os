@@ -1,256 +1,253 @@
-# Franchise Recruitment Marketing Playbook: Skill Samurai
+# Skill Samurai Marketing Playbook
 
-This playbook defines the strategy, channels, messaging, and KPIs for recruiting qualified franchise partners for Skill Samurai. It is designed to be executed by the growth team and referenced by AI agents generating recruitment content.
+## 90-Day Launch Plan for New Centres
+
+This playbook provides a structured 90-day marketing plan for new Skill Samurai franchisees launching their centre. It covers three phases -- Pre-Launch, Soft Launch, and Full Launch -- with specific activities, budgets, and KPIs for each. Total recommended budget: **$15,000 AUD**.
 
 ---
 
-## Funnel Overview
+## Budget Overview
 
-The franchise recruitment funnel has four stages. Each stage has distinct objectives, messaging, and content requirements.
+| Phase | Weeks | Budget (AUD) | % of Total |
+|---|---|---|---|
+| Pre-Launch | 1-4 | $4,500 | 30% |
+| Soft Launch | 5-8 | $5,500 | 37% |
+| Full Launch | 9-12 | $5,000 | 33% |
+| **Total** | **1-12** | **$15,000** | **100%** |
 
-| Stage       | Objective                              | Key Metric                  | Target Timeline  |
-|-------------|----------------------------------------|-----------------------------|------------------|
-| Awareness   | Attract mission-aligned professionals  | Impressions, click-through  | Ongoing          |
-| Interest    | Capture leads and initiate engagement  | Lead form submissions       | Days 1-7         |
-| Evaluation  | Educate and build conviction           | FDD requests, calls booked  | Days 7-45        |
-| Decision    | Close qualified candidates             | Signed franchise agreements | Days 45-90       |
+---
+
+## Phase 1: Pre-Launch (Weeks 1-4)
+
+### Objective
+Build local awareness, generate early interest, and establish the centre's digital presence before doors open.
+
+### Budget: $4,500 AUD
+
+| Activity | Budget | Details |
+|---|---|---|
+| Facebook/Instagram awareness ads | $1,500 | Geo-targeted ads within the territory. Audience: parents 30-55, interests in education/STEM/parenting. Video content showing kids coding and building robots. |
+| Google Ads (brand + local keywords) | $800 | Search ads for "coding classes for kids [suburb]", "after school STEM [city]", "kids robotics near me". |
+| Centre signage and window wraps | $1,200 | Branded signage, window decals, A-frame sidewalk sign. Must conform to brand guidelines. |
+| Flyer printing and distribution | $500 | 2,000 flyers for letterbox drops within 3km radius. Focus on streets near target schools. |
+| Local PR and media outreach | $200 | Press release to local newspapers, community newsletters, and parenting blogs. Template provided by HQ. |
+| Community Facebook group seeding | $0 | Join and contribute to 5+ local parent/community groups. Share valuable content, not hard sells. |
+| School introduction letters | $300 | Printed introductory packs to the principals of all primary and secondary schools in territory. Include offer for a free workshop. |
+
+### Key Activities
+1. Set up and optimise Google Business Profile with photos, hours, and service descriptions
+2. Launch Facebook and Instagram business pages; post 3x per week using content calendar
+3. Create a "Coming Soon" landing page with email capture for early-bird pricing
+4. Begin outreach to 10+ local schools with introduction letters and free workshop offers
+5. Connect with 3-5 local community organisations (scouts, sports clubs, libraries)
+6. Host a "Meet the Owner" event at a local community venue or school
+7. Start collecting email addresses for launch sequence (target: 200 subscribers)
+
+### KPIs
+- Email subscribers: 200
+- Facebook page followers: 300
+- Instagram followers: 150
+- School meetings booked: 5
+- Website visits: 1,500
+- Enquiries received: 40
+
+---
+
+## Phase 2: Soft Launch (Weeks 5-8)
+
+### Objective
+Convert early interest into trial bookings and first enrolments. Test class schedules and gather testimonials.
+
+### Budget: $5,500 AUD
+
+| Activity | Budget | Details |
+|---|---|---|
+| Facebook/Instagram conversion ads | $2,000 | Retarget website visitors and email subscribers. Lead gen ads with trial class booking. Lookalike audiences from HQ customer data. |
+| Google Ads (expanded keywords) | $1,200 | Add holiday camp keywords, robotics class terms, competitor brand terms. Increase bids on high-converting terms. |
+| Free trial classes (10 sessions) | $500 | Materials and instructor costs for free trial sessions. Maximum 8 kids per session. Aim for 80 trial attendees. |
+| Open day event | $800 | Saturday open day with free mini-workshops, robot demos, and parent information sessions. Refreshments and branded giveaways. |
+| Referral incentive program | $500 | "Bring a Friend" cards: referring family gets $50 credit, new family gets first class free. Print 500 cards. |
+| Local sponsorship | $500 | Sponsor a local school event, sports team, or community fair. Includes branded banner and flyer distribution. |
+
+### Key Activities
+1. Launch free trial class schedule (2 per week across different age groups)
+2. Host open day event on a Saturday (target: 30+ families attending)
+3. Activate referral program with printed cards and digital sharing
+4. Send 3-email nurture sequence to all email subscribers
+5. Collect video testimonials from trial class parents (target: 5)
+6. Confirm first school workshop booking
+7. Post trial class photos and videos on social media (with parent consent)
+8. Set up automated booking confirmation and reminder emails
+9. Begin Google review collection (target: 10 five-star reviews)
+10. Run a "Founding Member" early-bird discount (10% off first term)
+
+### KPIs
+- Trial class attendees: 80
+- Open day attendees: 30 families
+- Paid enrolments: 25
+- Google reviews: 10
+- Email list: 400
+- Social media followers: 600 combined
+- School workshops confirmed: 2
+- Referral cards distributed: 200
+
+---
+
+## Phase 3: Full Launch (Weeks 9-12)
+
+### Objective
+Fill initial class capacity, establish recurring revenue, and build momentum for Term 1 and beyond.
+
+### Budget: $5,000 AUD
+
+| Activity | Budget | Details |
+|---|---|---|
+| Facebook/Instagram ads (enrolment focus) | $1,500 | Conversion-optimised ads driving to enrolment page. Use testimonial videos and student project showcases. |
+| Google Ads (high-intent keywords) | $1,000 | Focus budget on highest-converting keywords. Add remarketing display ads. |
+| Grand opening event | $1,000 | Official launch event with local dignitary or influencer. Media invitation. Student demos. |
+| School workshop delivery (2 schools) | $500 | Deliver free workshops at partner schools. Distribute flyers to all attendees with enrolment offer. |
+| Email marketing automation | $300 | Set up automated sequences: welcome series, trial follow-up, enrolment nudge, holiday camp promo. |
+| Local partnerships activation | $400 | Cross-promotions with complementary local businesses (bookshops, tutoring centres, sports clubs). Flyer swaps and joint social posts. |
+| Printed collateral refresh | $300 | Term schedule brochures, business cards, pull-up banners for events. |
+
+### Key Activities
+1. Host grand opening event (target: 50+ attendees)
+2. Deliver workshops at 2 partner schools
+3. Launch holiday camp registrations (if timing aligns)
+4. Activate cross-promotional partnerships with 3+ local businesses
+5. Send "Last Spots" urgency emails for classes approaching capacity
+6. Begin planning Term 2 marketing based on learnings
+7. Submit first monthly marketing report to HQ
+8. Conduct first NPS survey with enrolled families
+9. Create and schedule next month's social media content calendar
+10. Photograph and video all student projects for ongoing content library
+
+### KPIs
+- Total paid enrolments: 50
+- Class utilisation rate: 60%
+- Monthly recurring revenue: $12,000 AUD
+- Google reviews: 20
+- Email list: 600
+- Social media followers: 1,000 combined
+- NPS score: 50+
+- School partnerships active: 3
+- Referral enrolments: 8
 
 ---
 
 ## Channel Strategy
 
-### Primary Channels
+### Facebook and Instagram
+**Budget allocation:** 40% of total marketing spend
+**Primary audience:** Mothers 30-55 within 10km of centre
+**Content mix:** 40% educational/value, 30% social proof, 20% promotional, 10% behind-the-scenes
+**Posting frequency:** 4-5x per week on Facebook, 3-4x on Instagram
+**Ad formats:** Video (60-second class highlights), carousel (program overview), lead gen (trial booking)
 
-#### 1. Google Ads (Search + Display)
+### Google Ads
+**Budget allocation:** 25% of total marketing spend
+**Campaign types:** Search (high-intent keywords), display (remarketing), local (Google Maps)
+**Target keywords:** "coding classes kids [suburb]", "STEM after school [city]", "robotics for children", "holiday coding camp", "kids programming classes near me"
+**Quality score target:** 7+
+**Landing page:** Dedicated location page with trial booking form
 
-- **Budget share:** 20% of total marketing spend
-- **Targeting:** Keywords related to franchise opportunities, education franchises, STEM business, and children's enrichment programs.
-- **Ad types:** Search ads for high-intent queries ("buy a franchise," "education franchise opportunity"). Display retargeting for website visitors.
-- **Landing page:** Dedicated franchise opportunity page with lead capture form.
-- **Expected CPL:** $35-$60
+### School Partnerships
+**Budget allocation:** 10% of total marketing spend
+**Approach:** Principal introduction letter, followed by phone call, followed by in-person meeting
+**Offer:** Free 45-minute workshop for one class as a trial, with option for ongoing after-school or incursion program
+**Target:** 10 schools approached, 5 meetings, 3 partnerships established in first 90 days
+**Materials:** School-specific brochure, teacher information sheet, parent permission slip template
 
-#### 2. Facebook and Instagram Ads
+### Community Events and Sponsorships
+**Budget allocation:** 15% of total marketing spend
+**Events:** School fairs, community markets, library events, sports club presentation nights
+**Setup:** Branded gazebo, robot demo station, coding activity for kids, flyers for parents
+**Goal:** 50+ parent conversations per event, 20+ email captures
 
-- **Budget share:** 20% of total marketing spend
-- **Targeting:** Lookalike audiences based on existing franchisee profiles. Interest targeting for education professionals, entrepreneurs, and parents aged 30-55.
-- **Ad types:** Video testimonials from existing partners. Carousel ads showing the franchise journey. Lead generation forms.
-- **Creative refresh:** Every 3-4 weeks to prevent fatigue.
-- **Expected CPL:** $25-$45
+### Email Marketing
+**Budget allocation:** 5% of total marketing spend (tooling costs)
+**Platform:** SendGrid (provided via HQ integration)
+**Sequences:**
+1. **Welcome series** (3 emails over 7 days): Introduce brand, share success stories, offer trial
+2. **Trial follow-up** (3 emails over 5 days): Thank you, what to expect, enrolment offer
+3. **Enrolment nudge** (2 emails): Limited spots, testimonial, deadline reminder
+4. **Holiday camp promo** (4 emails over 3 weeks): Announce, early-bird, spotlight, last chance
+5. **Referral activation** (2 emails): Explain program, share referral link
+6. **Re-engagement** (2 emails): "We miss you", special offer for returning families
 
-#### 3. LinkedIn
-
-- **Budget share:** 10% of total marketing spend (organic + paid)
-- **Targeting:** Job titles including teacher, principal, school administrator, corporate trainer, curriculum developer. Also target professionals in career transition.
-- **Content:** Thought leadership posts from the CEO. Franchise partner spotlight stories. STEM education industry insights.
-- **Expected CPL:** $50-$80
-
-#### 4. Franchise Portals
-
-- **Budget share:** 10% of total marketing spend
-- **Platforms:** Franchise Direct, Franchise Gator, Entrepreneur Franchise 500 listing, BizBuySell.
-- **Listing optimization:** Update quarterly with fresh testimonials, financial data (within FDD guidelines), and imagery.
-- **Expected CPL:** $40-$70
-
-#### 5. Referral Program
-
-- **Budget share:** 10% allocated to referral incentives
-- **Structure:** Existing franchise partners receive a referral bonus ($2,500-$5,000) for qualified candidates who sign.
-- **Activation:** Quarterly referral campaigns with email reminders and leaderboard recognition.
-- **Expected CPL:** $15-$30 (highest quality leads)
-
-### Secondary Channels
-
-#### 6. Content Marketing and SEO
-
-- **Budget share:** 20% of total marketing spend
-- **Content types:** Blog posts, franchise buyer guides, territory analysis reports, video tours.
-- **SEO targets:** "children's coding franchise," "STEM education franchise," "low-cost education franchise," "franchise opportunities for teachers."
-- **Publishing cadence:** 2 blog posts per week, 1 long-form guide per month.
-
-#### 7. Events and Tradeshows
-
-- **Budget share:** 15% of total marketing spend
-- **Events:** International Franchise Expo, local franchise expos, education industry conferences.
-- **Activation:** Booth presence, speaking opportunities, post-event email sequences for badge scans.
-- **Follow-up:** Within 48 hours of event close.
-
-#### 8. PR and Media
-
-- **Budget share:** 10% of total marketing spend
-- **Activities:** Press releases for new unit openings and milestones. Franchise trade media pitches. Local media outreach for franchise partner stories.
+### Local PR
+**Budget allocation:** 5% of total marketing spend
+**Activities:** Press release for opening, pitch local interest stories, invite media to events
+**Targets:** Local newspapers, community newsletters, parenting bloggers, local radio
 
 ---
 
-## Messaging by Funnel Stage
+## Content Calendar Template (Monthly)
 
-### Awareness Stage
-
-**Goal:** Introduce Skill Samurai as a franchise opportunity and attract initial attention.
-
-**Core messages:**
-- "Own a business that shapes the next generation of innovators."
-- "The children's education market is growing. Skill Samurai gives you a proven system to capture it."
-- "No coding background required. Full training and support provided."
-
-**Content types:**
-- Social media ads (video + static)
-- Blog posts on franchise ownership and STEM education trends
-- PR placements in franchise trade media
-
-### Interest Stage
-
-**Goal:** Convert attention into leads. Capture contact information.
-
-**Core messages:**
-- "Download our free Franchise Guide to see if Skill Samurai is right for you."
-- "Learn how franchise partners are building profitable STEM education businesses in their communities."
-- "Take the first step: request information and we will be in touch within 24 hours."
-
-**Content types:**
-- Franchise Guide (PDF download, gated)
-- Webinar: "Is a Skill Samurai Franchise Right for You?" (monthly)
-- Landing pages with lead capture forms
-- Retargeting ads
-
-### Evaluation Stage
-
-**Goal:** Build trust, answer objections, and move candidates toward Discovery Day.
-
-**Core messages:**
-- "Here is exactly what your first 12 months look like."
-- "Hear from franchise partners who were in your shoes."
-- "Our territory scoring system ensures you launch in a market primed for success."
-
-**Content types:**
-- Franchisee testimonial videos
-- Unit economics overview (within FDD guidelines)
-- Territory analysis samples
-- One-on-one calls with the franchise development team
-- FDD delivery and review support
-
-### Decision Stage
-
-**Goal:** Close qualified candidates. Remove final objections. Execute agreements.
-
-**Core messages:**
-- "Your territory is available now. Here is the timeline to launch."
-- "Discovery Day is your chance to see the full system and meet the team."
-- "Financing options are available. Let us walk you through them."
-
-**Content types:**
-- Discovery Day invitation and agenda
-- Financing partner introductions
-- Franchise agreement review sessions
-- Onboarding timeline preview
+| Week | Monday | Wednesday | Friday | Saturday |
+|---|---|---|---|---|
+| 1 | Educational tip (coding concept) | Student spotlight | Program promo | Behind-the-scenes |
+| 2 | Parent testimonial | Fun tech fact | Holiday camp promo | Class photo gallery |
+| 3 | Blog post share | Instructor spotlight | Enrolment CTA | Community event recap |
+| 4 | Educational tip | Partner spotlight | Term recap / preview | Student project showcase |
 
 ---
 
-## Email Sequences
+## Measurement and Reporting
 
-### Sequence 1: New Lead Nurture (7 emails over 21 days)
+### Weekly Metrics (tracked by franchisee)
+- Ad spend by channel
+- Website visits and trial bookings
+- Enquiries received (phone, email, walk-in)
+- Social media engagement rate
 
-| Day | Subject Line                                    | Content Focus                                    |
-|-----|------------------------------------------------|--------------------------------------------------|
-| 0   | "Thanks for your interest in Skill Samurai"    | Welcome, brand overview, what to expect next.    |
-| 2   | "Why STEM education is a growth market"        | Industry data, market opportunity.               |
-| 5   | "Meet a franchise partner: Sarah's story"      | Testimonial, day-in-the-life.                    |
-| 8   | "What does it cost to open a Skill Samurai?"   | Investment overview, financing options.           |
-| 12  | "No coding experience? No problem."            | Training and support system overview.             |
-| 16  | "Is your area available?"                      | Territory map teaser, CTA to book a call.         |
-| 21  | "Ready to take the next step?"                 | Direct CTA to schedule a qualification call.      |
+### Monthly Metrics (reported to HQ)
+- Total enrolments (new and returning)
+- Cost per lead by channel
+- Cost per enrolment by channel
+- Class utilisation rate
+- Revenue vs. target
+- NPS score
+- Google review count and average rating
 
-### Sequence 2: Post-Qualification Call (5 emails over 14 days)
-
-| Day | Subject Line                                    | Content Focus                                    |
-|-----|------------------------------------------------|--------------------------------------------------|
-| 0   | "Great speaking with you today"                | Recap of call, next steps, FDD delivery.         |
-| 3   | "Your FDD is ready for review"                 | FDD access link, guidance on what to focus on.   |
-| 7   | "Questions about the FDD? Let us help."        | Common questions, offer to schedule a review.    |
-| 10  | "Talk to a franchise partner directly"         | Validation call scheduling, partner contact info.|
-| 14  | "Discovery Day: your invitation"               | Discovery Day details, agenda, RSVP.             |
-
-### Sequence 3: Re-Engagement (3 emails over 30 days)
-
-For leads that have gone cold after initial engagement.
-
-| Day | Subject Line                                    | Content Focus                                    |
-|-----|------------------------------------------------|--------------------------------------------------|
-| 0   | "Still thinking about franchise ownership?"    | Soft re-engagement, new testimonial or data.     |
-| 14  | "New territories just opened in your area"     | Territory availability update, urgency.          |
-| 30  | "Last check-in from Skill Samurai"             | Final touchpoint, direct CTA, unsubscribe option.|
-
----
-
-## Landing Page Requirements
-
-Every franchise recruitment landing page must include:
-
-1. **Headline:** Outcome-focused, under 12 words. Example: "Build a Profitable Business That Shapes Young Innovators."
-2. **Subheadline:** Supporting detail in one sentence. Example: "Skill Samurai is a children's coding and STEM education franchise with a proven model."
-3. **Hero image or video:** Franchise partner in-centre with students. Must look authentic, not stock.
-4. **Three value pillars:** Proven model, full training and support, growing market.
-5. **Social proof:** Partner testimonial with photo, name, and location.
-6. **Investment snapshot:** High-level investment range (not exact figures without FDD context).
-7. **Lead capture form:** Name, email, phone, zip code, liquid capital range (dropdown), "How did you hear about us?" (dropdown).
-8. **Trust elements:** Franchise association membership badges, media logos, award logos.
-9. **Mobile responsive:** All pages must score 90+ on Google PageSpeed for mobile.
-
----
-
-## Key Performance Indicators
-
-### Monthly Tracking
-
-| KPI                              | Target          |
-|----------------------------------|-----------------|
-| Total leads generated            | 165+ per month  |
-| Cost per lead (blended)          | Under $50       |
-| Lead-to-qualified rate           | 15-20%          |
-| Qualified-to-FDD rate            | 40%             |
-| FDD-to-Discovery Day rate        | 50%             |
-| Discovery Day-to-close rate      | 60%             |
-| Overall conversion rate          | 3.5%            |
-| Average time to close            | 90 days         |
-| Cost per acquisition             | Under $1,500    |
-
-### Quarterly Review
-
-- Channel performance comparison (CPL, conversion rate, lead quality score)
-- Creative fatigue analysis and refresh planning
-- Funnel stage dropout analysis
-- Territory demand heatmap review
+### Quarterly Business Review
+Every quarter, the regional manager reviews marketing performance with each franchisee. This includes:
+- Channel ROI analysis
 - Budget reallocation recommendations
-
-### Annual Targets (FY 2026)
-
-- Total leads: 2,000
-- New franchise agreements signed: 12
-- Territories scored and published: 50
-- Franchise Guide downloads: 500+
-- Discovery Day attendees: 30+
+- Competitor activity review
+- Upcoming campaign planning
+- Content performance review
 
 ---
 
-## Budget Summary
+## Country-Specific Adjustments
 
-Total annual recruitment marketing budget is allocated as follows:
+### Australia
+- Primary channel focus: Facebook, Instagram, Google Ads
+- School term calendar: 4 terms per year (Feb, Apr, Jul, Oct starts)
+- Holiday camp windows: April, July, September/October, December/January
 
-| Category             | Allocation | Primary Channels                              |
-|----------------------|------------|-----------------------------------------------|
-| Digital ads          | 40%        | Google Ads, Facebook/Instagram, LinkedIn       |
-| Content marketing    | 20%        | Blog, SEO, Franchise Guide, video production   |
-| Events / tradeshows  | 15%        | Franchise expos, education conferences          |
-| Referral incentives  | 10%        | Partner referral bonuses                        |
-| PR / media           | 10%        | Press releases, trade media, local media        |
-| Reserve              | 5%         | Opportunistic spend, testing new channels       |
+### Canada
+- Adapt currency to CAD in all materials
+- School year: September-June, with summer camps in July/August
+- French-language materials required for Quebec territories
+- Leverage local hockey and STEM crossover messaging in winter months
+
+### Egypt
+- Master franchisee leads local marketing execution
+- Arabic support materials alongside English
+- Focus on private and international school partnerships
+- Ramadan-sensitive scheduling and messaging
+- Social media emphasis on Instagram and Facebook (high adoption)
 
 ---
 
-## Compliance Notes
+## Brand Compliance Reminders
 
-- All marketing materials must comply with FTC Franchise Rule guidelines.
-- Financial performance representations may only be made in Item 19 of the FDD.
-- Earnings claims, implied or explicit, are prohibited in advertising and sales materials.
-- All testimonials must include appropriate disclaimers.
-- Landing pages and ads must be reviewed by legal counsel before launch.
-- Email communications must comply with CAN-SPAM requirements, including clear unsubscribe mechanisms.
+- All ads must use approved brand colours, fonts, and imagery
+- Photography must show diverse children engaged in learning (never posed stock photos)
+- All claims must be factual and verifiable; no guaranteed outcomes
+- Parent testimonials require written consent and release forms
+- Social media responses must follow the brand voice guide
+- Local promotions require HQ approval if they deviate from standard offers
+- Franchisees may not create independent websites or social media pages outside the approved structure

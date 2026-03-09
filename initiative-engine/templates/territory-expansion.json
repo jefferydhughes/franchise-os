@@ -1,0 +1,23 @@
+{
+  "type": "territory_expansion",
+  "required_fields": ["territory_name", "region", "target_state"],
+  "default_agents": [
+    "TERRITORY_INTELLIGENCE_AGENT",
+    "MARKET_OPPORTUNITY_AGENT",
+    "LANDING_PAGE_AGENT",
+    "EMAIL_AGENT",
+    "SOCIAL_CONTENT_AGENT",
+    "CAMPAIGN_AGENT"
+  ],
+  "estimated_duration_days": 14,
+  "success_metrics": [
+    "leads_generated",
+    "territory_score_change",
+    "landing_page_conversions"
+  ],
+  "rollback_steps": [
+    "pause_campaign",
+    "archive_landing_page",
+    "notify_stakeholders"
+  ]
+}

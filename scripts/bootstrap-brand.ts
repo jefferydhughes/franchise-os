@@ -287,11 +287,14 @@ async function seedBrandRecord(slug: string, name: string): Promise<void> {
     {
       slug,
       name,
-      active: true,
-      colors: { primary: "#2563EB", secondary: "#1E40AF", accent: "#F59E0B" },
-      voice_tone: "professional, approachable, confident",
-      royalty_rate: 0.06,
+      status: "active",
+      config: {
+        colors: { primary: "#2563EB", secondary: "#1E40AF", accent: "#F59E0B" },
+        voice_tone: "professional, approachable, confident",
+        royalty_rate: 0.06,
+      },
       created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     },
     { onConflict: "slug" }
   );
@@ -302,24 +305,43 @@ async function seedBrandRecord(slug: string, name: string): Promise<void> {
     console.log(`  Inserted brand record into Supabase (slug="${slug}")`);
   }
 
+  // Resolve brand_id for territory insertion
+  const { data: brandRow } = await supabase
+    .from("brands")
+    .select("id")
+    .eq("slug", slug)
+    .single();
+
+  if (!brandRow) {
+    console.error("[bootstrap] Could not resolve brand_id for territory seeding.");
+    return;
+  }
+
   // Seed one example territory
   const { error: territoryError } = await supabase.from("territories").insert({
-    brand: slug,
+    brand_id: brandRow.id,
     name: `${name} — Downtown Metro`,
-    status: "available",
-    population: 125000,
-    radius_km: 12,
-    center_lat: 40.7128,
-    center_lng: -74.006,
+    region: "Example Region",
+    status: "open",
     score: 82,
-    metadata: {
+    grade: "A",
+    geo_data: {
+      center: { lat: 40.7128, lng: -74.006 },
+      radius_km: 12,
+      city: "Metro",
+      state: "NY",
+      country: "US",
+    },
+    demographics: {
+      population: 125000,
+      households: 45000,
       median_income: 72000,
       school_count: 14,
-      competitor_count: 2,
-      growth_rate: 0.032,
-      seeded: true,
+      family_density_score: 78,
+      school_density_score: 72,
     },
     created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   });
 
   if (territoryError) {

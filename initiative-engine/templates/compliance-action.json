@@ -1,0 +1,20 @@
+{
+  "type": "compliance_action",
+  "required_fields": ["violation_type", "franchisee_id", "severity"],
+  "default_agents": [
+    "COO_AGENT",
+    "REPORT_AGENT"
+  ],
+  "estimated_duration_days": 21,
+  "success_metrics": [
+    "compliance_status",
+    "corrective_actions_completed",
+    "audit_pass_rate",
+    "resolution_time_days"
+  ],
+  "rollback_steps": [
+    "escalate_to_legal",
+    "suspend_corrective_action",
+    "notify_compliance_officer"
+  ]
+}

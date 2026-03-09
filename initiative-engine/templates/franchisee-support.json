@@ -1,0 +1,21 @@
+{
+  "type": "franchisee_support",
+  "required_fields": ["franchisee_id", "support_type", "priority_level"],
+  "default_agents": [
+    "COACHING_AGENT",
+    "ONBOARDING_AGENT",
+    "REPORT_AGENT"
+  ],
+  "estimated_duration_days": 30,
+  "success_metrics": [
+    "franchisee_satisfaction_score",
+    "issue_resolution_time",
+    "performance_improvement_pct",
+    "retention_status"
+  ],
+  "rollback_steps": [
+    "escalate_to_human",
+    "pause_coaching_sessions",
+    "notify_franchise_manager"
+  ]
+}

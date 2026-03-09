@@ -1,48 +1,339 @@
 {
   "brand": "skill-samurai",
-  "fiscal_year": "2026",
-  "targets": {
-    "new_units": 12,
-    "territories_scored": 50,
-    "leads_generated": 2000,
-    "conversion_rate_target": 0.035,
-    "avg_time_to_close_days": 90
-  },
-  "priority_markets": [
-    {
-      "region": "Texas",
-      "cities": ["Dallas", "Houston", "Austin"],
-      "priority": "high"
+  "version": "3.0",
+  "last_updated": "2026-02-20",
+  "planning_horizon_years": 3,
+  "goal": "150 locations across Australia, Canada, and Egypt",
+  "yearly_targets": {
+    "year_1": {
+      "label": "Foundation",
+      "period": "2026-07-01 to 2027-06-30",
+      "total_new_units": 15,
+      "cumulative_units": 15,
+      "by_country": {
+        "AU": {
+          "new_units": 10,
+          "priority_cities": ["Sydney", "Melbourne", "Brisbane", "Perth"],
+          "model": "single_unit",
+          "notes": "Focus on capital cities and established suburban corridors with proven demand signals."
+        },
+        "CA": {
+          "new_units": 3,
+          "priority_cities": ["Toronto", "Vancouver"],
+          "model": "single_unit",
+          "notes": "Enter market through Greater Toronto Area. Complete provincial franchise disclosure for Ontario and British Columbia."
+        },
+        "EG": {
+          "new_units": 2,
+          "priority_cities": ["Cairo", "New Cairo"],
+          "model": "master_franchise",
+          "notes": "Appoint master franchisee for Egypt. First 2 units operated by master franchisee as proof-of-concept centres."
+        }
+      },
+      "revenue_projection": {
+        "total_system_revenue_aud": 4200000,
+        "franchise_fee_income_aud": 675000,
+        "royalty_income_aud": 336000,
+        "marketing_fund_income_aud": 84000,
+        "platform_fee_income_aud": 63000,
+        "total_franchisor_income_aud": 1158000
+      },
+      "key_milestones": [
+        "Appoint Egypt master franchisee by Q1",
+        "Complete Canadian franchise disclosure documents by Q1",
+        "Open first 5 Australian centres by Q2",
+        "Launch first Canadian centre by Q3",
+        "Open first Egypt centre by Q4",
+        "Achieve 60% average class utilisation across network",
+        "Establish franchisee peer network and quarterly webinar program"
+      ]
     },
-    {
-      "region": "Florida",
-      "cities": ["Tampa", "Orlando", "Miami"],
-      "priority": "high"
+    "year_2": {
+      "label": "Acceleration",
+      "period": "2027-07-01 to 2028-06-30",
+      "total_new_units": 35,
+      "cumulative_units": 50,
+      "by_country": {
+        "AU": {
+          "new_units": 20,
+          "priority_cities": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast", "Canberra", "Newcastle"],
+          "model": "single_unit",
+          "notes": "Expand to secondary cities and outer suburban rings. Introduce multi-unit operator incentives."
+        },
+        "CA": {
+          "new_units": 9,
+          "priority_cities": ["Toronto", "Vancouver", "Calgary", "Ottawa", "Montreal"],
+          "model": "single_unit",
+          "notes": "Expand beyond initial markets. Quebec launch requires bilingual curriculum and French marketing materials."
+        },
+        "EG": {
+          "new_units": 6,
+          "priority_cities": ["Cairo", "Alexandria", "Giza", "New Cairo"],
+          "model": "master_franchise",
+          "notes": "Master franchisee begins sub-franchising. HQ provides curriculum and brand oversight; master handles local operations and recruitment."
+        }
+      },
+      "revenue_projection": {
+        "total_system_revenue_aud": 16800000,
+        "franchise_fee_income_aud": 1575000,
+        "royalty_income_aud": 1344000,
+        "marketing_fund_income_aud": 336000,
+        "platform_fee_income_aud": 252000,
+        "total_franchisor_income_aud": 3507000
+      },
+      "key_milestones": [
+        "Reach 50 cumulative centres by end of Y2",
+        "Launch multi-unit operator program",
+        "Achieve 70% average class utilisation across network",
+        "Host first annual franchisee conference",
+        "Introduce AI Fundamentals program across all centres",
+        "Establish regional manager structure (AU East, AU West, CA, EG)",
+        "Launch holiday camp program in all centres"
+      ]
     },
-    {
-      "region": "Arizona",
-      "cities": ["Phoenix", "Scottsdale"],
-      "priority": "medium"
-    },
-    {
-      "region": "California",
-      "cities": ["San Diego", "Sacramento"],
-      "priority": "medium"
+    "year_3": {
+      "label": "Scale",
+      "period": "2028-07-01 to 2029-06-30",
+      "total_new_units": 50,
+      "cumulative_units": 100,
+      "by_country": {
+        "AU": {
+          "new_units": 25,
+          "priority_cities": ["All capital cities", "Major regional centres"],
+          "model": "single_unit",
+          "notes": "Saturate major metros and enter regional centres with populations above 80,000. Multi-unit operators target: 30% of new openings."
+        },
+        "CA": {
+          "new_units": 15,
+          "priority_cities": ["Toronto", "Vancouver", "Calgary", "Ottawa", "Montreal", "Edmonton", "Winnipeg"],
+          "model": "single_unit",
+          "notes": "National coverage across major English-speaking markets. Quebec operations fully bilingual."
+        },
+        "EG": {
+          "new_units": 10,
+          "priority_cities": ["Cairo", "Alexandria", "Giza", "New Cairo", "Heliopolis", "Mansoura"],
+          "model": "master_franchise",
+          "notes": "Master franchisee self-sustaining. Sub-franchise network established with local training capability."
+        }
+      },
+      "revenue_projection": {
+        "total_system_revenue_aud": 39200000,
+        "franchise_fee_income_aud": 2250000,
+        "royalty_income_aud": 3136000,
+        "marketing_fund_income_aud": 784000,
+        "platform_fee_income_aud": 588000,
+        "total_franchisor_income_aud": 6758000
+      },
+      "key_milestones": [
+        "Reach 100 cumulative centres",
+        "Achieve 75% average class utilisation across network",
+        "Launch Teen Tech advanced program in all centres",
+        "Begin planning for Year 4-5 expansion (NZ, UAE, UK evaluation)",
+        "Multi-unit operators represent 30%+ of network",
+        "Franchise resale market established with first successful transfers",
+        "System-wide NPS score of 60+"
+      ]
     }
-  ],
-  "channels": [
-    "google_ads",
-    "facebook",
-    "linkedin",
-    "franchise_portals",
-    "referral_program"
-  ],
-  "budget_allocation": {
-    "digital_ads": 0.40,
-    "content_marketing": 0.20,
-    "events_tradeshows": 0.15,
-    "referral_incentives": 0.10,
-    "pr_media": 0.10,
-    "reserve": 0.05
+  },
+  "fees_and_economics": {
+    "franchise_fee_aud": 45000,
+    "royalty_rate": 0.08,
+    "marketing_fund_rate": 0.02,
+    "platform_fee_rate": 0.015,
+    "total_franchisee_cost_rate": 0.115,
+    "average_unit_economics": {
+      "year_1": {
+        "revenue_aud": 280000,
+        "cogs_aud": 56000,
+        "gross_margin": 0.80,
+        "operating_expenses_aud": 168000,
+        "royalty_aud": 22400,
+        "marketing_fund_aud": 5600,
+        "platform_fee_aud": 4200,
+        "net_profit_aud": 23800,
+        "net_margin": 0.085
+      },
+      "year_2": {
+        "revenue_aud": 420000,
+        "cogs_aud": 80000,
+        "gross_margin": 0.81,
+        "operating_expenses_aud": 210000,
+        "royalty_aud": 33600,
+        "marketing_fund_aud": 8400,
+        "platform_fee_aud": 6300,
+        "net_profit_aud": 81700,
+        "net_margin": 0.195
+      },
+      "year_3": {
+        "revenue_aud": 560000,
+        "cogs_aud": 100800,
+        "gross_margin": 0.82,
+        "operating_expenses_aud": 252000,
+        "royalty_aud": 44800,
+        "marketing_fund_aud": 11200,
+        "platform_fee_aud": 8400,
+        "net_profit_aud": 142800,
+        "net_margin": 0.255
+      }
+    }
+  },
+  "multi_unit_incentives": {
+    "eligibility": {
+      "min_existing_units": 1,
+      "min_operating_months": 12,
+      "min_performance_grade": "B",
+      "min_nps_score": 45
+    },
+    "incentives": [
+      {
+        "units": "2nd unit",
+        "franchise_fee_discount": 0.10,
+        "effective_fee_aud": 40500,
+        "additional_benefits": ["Shared marketing budget across units", "Priority territory selection"]
+      },
+      {
+        "units": "3rd unit",
+        "franchise_fee_discount": 0.15,
+        "effective_fee_aud": 38250,
+        "additional_benefits": ["Dedicated multi-unit support manager", "Quarterly strategy sessions with CEO"]
+      },
+      {
+        "units": "4th+ units",
+        "franchise_fee_discount": 0.20,
+        "effective_fee_aud": 36000,
+        "additional_benefits": ["Area developer agreement option", "Reduced royalty rate of 7% on units 4+", "Input into curriculum development"]
+      }
+    ],
+    "area_developer_program": {
+      "min_units_commitment": 5,
+      "territory_exclusivity": true,
+      "development_schedule_years": 3,
+      "area_developer_fee_aud": 180000,
+      "royalty_rate": 0.065,
+      "sub_franchising_rights": false,
+      "benefits": [
+        "Exclusive development rights for defined region",
+        "Reduced royalty rate across all units",
+        "Seat on franchisee advisory council",
+        "Annual strategy retreat with executive team"
+      ]
+    }
+  },
+  "master_franchise_egypt": {
+    "territory": "Arab Republic of Egypt (national)",
+    "master_franchise_fee_aud": 150000,
+    "royalty_split": {
+      "master_franchisee_retains": 0.04,
+      "remitted_to_franchisor": 0.04
+    },
+    "marketing_fund_rate": 0.02,
+    "sub_franchise_fee_aud_equivalent": 35000,
+    "minimum_development_schedule": {
+      "year_1": 2,
+      "year_2": 6,
+      "year_3": 8,
+      "year_4": 12,
+      "year_5": 15
+    },
+    "master_franchisee_obligations": [
+      "Recruit, train, and support sub-franchisees",
+      "Maintain local training centre in Cairo",
+      "Adapt curriculum materials for local context (Arabic support materials)",
+      "Ensure regulatory compliance with Egyptian education and business law",
+      "Attend annual franchisor conference in Sydney",
+      "Submit monthly performance reports to HQ",
+      "Maintain brand standards across all sub-franchise locations"
+    ],
+    "franchisor_support": [
+      "Initial 10-day master franchisee training in Sydney",
+      "Curriculum and content updates delivered quarterly",
+      "Brand asset library and marketing templates",
+      "Technology platform access and support",
+      "Annual on-site audit and support visit",
+      "Quarterly video strategy sessions with international expansion team"
+    ],
+    "performance_review": {
+      "frequency": "annual",
+      "metrics": ["units_opened_vs_schedule", "system_revenue", "brand_compliance_score", "nps_score"],
+      "exclusivity_review_years": 3,
+      "termination_triggers": [
+        "Failure to meet 50% of development schedule for 2 consecutive years",
+        "Brand compliance score below 60 for 2 consecutive audits",
+        "Failure to remit royalties for 3 consecutive months"
+      ]
+    }
+  },
+  "expansion_pipeline": {
+    "phase_2_evaluation": {
+      "timeline": "Year 3-4",
+      "markets_under_consideration": [
+        {
+          "country": "NZ",
+          "model": "single_unit",
+          "rationale": "Cultural and regulatory similarity to Australia. Strong STEM education demand. Manageable from Sydney HQ.",
+          "estimated_potential_units": 15
+        },
+        {
+          "country": "UAE",
+          "model": "master_franchise",
+          "rationale": "High disposable income, strong appetite for international education brands, English-medium market.",
+          "estimated_potential_units": 20
+        },
+        {
+          "country": "GB",
+          "model": "master_franchise",
+          "rationale": "Large addressable market, established coding education sector, English-speaking.",
+          "estimated_potential_units": 40
+        }
+      ],
+      "evaluation_criteria": [
+        "Market size and demographic fit",
+        "Regulatory complexity and cost of entry",
+        "Competitive landscape",
+        "Availability of qualified master franchisee candidates",
+        "Currency and remittance considerations",
+        "HQ capacity to support additional markets"
+      ]
+    }
+  },
+  "risk_mitigation": {
+    "key_risks": [
+      {
+        "risk": "Slower than projected unit growth",
+        "likelihood": "medium",
+        "impact": "high",
+        "mitigation": "Maintain pipeline of 3x target candidates at all times. Offer incentives for early commitment. Reduce franchise fee for first 5 units in new markets."
+      },
+      {
+        "risk": "Franchisee underperformance",
+        "likelihood": "medium",
+        "impact": "medium",
+        "mitigation": "Structured onboarding and 90-day launch support. Quarterly business reviews. Performance improvement plans with clear timelines. Exit assistance if unrecoverable."
+      },
+      {
+        "risk": "Curriculum relevance decline",
+        "likelihood": "low",
+        "impact": "high",
+        "mitigation": "Dedicated curriculum team with annual review cycle. Advisory board including educators and industry professionals. Student and parent feedback loops."
+      },
+      {
+        "risk": "Regulatory changes in child safety or education",
+        "likelihood": "medium",
+        "impact": "medium",
+        "mitigation": "Proactive compliance monitoring in all markets. Legal counsel retained in AU, CA, and EG. Compliance buffer built into operational standards."
+      },
+      {
+        "risk": "Foreign exchange exposure (EG, CA revenues)",
+        "likelihood": "high",
+        "impact": "low",
+        "mitigation": "Royalties invoiced in local currency and converted monthly. Forward contracts considered for Egypt given EGP volatility. Platform fees collected in AUD."
+      },
+      {
+        "risk": "Master franchisee failure in Egypt",
+        "likelihood": "low",
+        "impact": "high",
+        "mitigation": "Rigorous selection process. Performance milestones with exclusivity review at Year 3. Step-in rights defined in master franchise agreement. Relationship with backup candidates maintained."
+      }
+    ]
   }
 }

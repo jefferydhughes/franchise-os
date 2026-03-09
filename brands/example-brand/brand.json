@@ -3,45 +3,363 @@
   "slug": "skill-samurai",
   "domain": "os.skillsamurai.com",
   "status": "active",
+  "tagline": "Future-Ready Kids Start Here",
+  "description": "STEM enrichment education franchise specialising in coding, robotics, AI, and Singapore Math for children aged 5-17.",
+  "founded": 2017,
+  "headquarters": {
+    "city": "Sydney",
+    "state": "NSW",
+    "country": "AU",
+    "timezone": "Australia/Sydney"
+  },
+  "supported_countries": ["AU", "CA", "EG"],
+  "currency": "AUD",
   "colors": {
     "primary": "#1E40AF",
     "secondary": "#1E293B",
-    "accent": "#F59E0B"
+    "accent": "#F59E0B",
+    "background": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569",
+    "success": "#16A34A",
+    "warning": "#EAB308",
+    "error": "#DC2626"
   },
-  "voice_tone": "Professional, empowering, education-focused.",
+  "fonts": {
+    "heading": "Poppins",
+    "body": "Inter",
+    "mono": "Fira Code"
+  },
+  "logo": {
+    "primary": "/assets/brands/skill-samurai/logo-primary.svg",
+    "icon": "/assets/brands/skill-samurai/logo-icon.svg",
+    "white": "/assets/brands/skill-samurai/logo-white.svg"
+  },
+  "voice_tone": {
+    "primary": "empowering",
+    "secondary": "educational",
+    "attributes": ["parent-friendly", "future-focused", "approachable", "credible"],
+    "reading_level": "grade_8"
+  },
   "programs": [
-    "after-school STEM",
-    "holiday camps",
-    "birthday parties",
-    "school workshops"
+    {
+      "id": "mini-coders",
+      "name": "Mini Coders",
+      "age_range": [5, 7],
+      "description": "Introduction to computational thinking through visual block-based coding, simple robotics, and logic puzzles.",
+      "session_duration_minutes": 60,
+      "sessions_per_term": 10,
+      "max_class_size": 8,
+      "categories": ["coding", "robotics"]
+    },
+    {
+      "id": "junior-coders",
+      "name": "Junior Coders",
+      "age_range": [8, 10],
+      "description": "Intermediate coding with Scratch, Python basics, LEGO robotics, and introduction to Singapore Math problem-solving.",
+      "session_duration_minutes": 75,
+      "sessions_per_term": 10,
+      "max_class_size": 10,
+      "categories": ["coding", "robotics", "math"]
+    },
+    {
+      "id": "senior-coders",
+      "name": "Senior Coders",
+      "age_range": [11, 14],
+      "description": "Advanced Python, web development, Arduino robotics, AI fundamentals, and competition preparation.",
+      "session_duration_minutes": 90,
+      "sessions_per_term": 10,
+      "max_class_size": 12,
+      "categories": ["coding", "robotics", "ai", "math"]
+    },
+    {
+      "id": "teen-tech",
+      "name": "Teen Tech",
+      "age_range": [15, 17],
+      "description": "Industry-ready skills including full-stack development, machine learning, data science, and portfolio building.",
+      "session_duration_minutes": 90,
+      "sessions_per_term": 10,
+      "max_class_size": 12,
+      "categories": ["coding", "ai", "data_science"]
+    }
   ],
-  "royalty_rate": 0.07,
+  "service_lines": [
+    {
+      "id": "after-school",
+      "name": "After-School Coding Classes",
+      "type": "recurring",
+      "revenue_tier": "primary",
+      "description": "Weekly term-based classes running during the school year."
+    },
+    {
+      "id": "robotics-workshops",
+      "name": "Robotics Workshops",
+      "type": "recurring",
+      "revenue_tier": "primary",
+      "description": "Hands-on robotics sessions using LEGO, Arduino, and custom kits."
+    },
+    {
+      "id": "holiday-camps",
+      "name": "Holiday Camps",
+      "type": "seasonal",
+      "revenue_tier": "secondary",
+      "description": "Intensive multi-day programs during school holidays covering themed projects."
+    },
+    {
+      "id": "birthday-parties",
+      "name": "Birthday Parties",
+      "type": "event",
+      "revenue_tier": "ancillary",
+      "description": "STEM-themed birthday party packages with coding or robotics activities."
+    },
+    {
+      "id": "school-workshops",
+      "name": "School Workshops",
+      "type": "b2b",
+      "revenue_tier": "secondary",
+      "description": "In-school incursions and workshops delivered during school hours or as extracurricular programs."
+    },
+    {
+      "id": "ai-fundamentals",
+      "name": "AI Fundamentals",
+      "type": "recurring",
+      "revenue_tier": "primary",
+      "description": "Dedicated program teaching AI and machine learning concepts appropriate to each age group."
+    }
+  ],
+  "royalty_rate": 0.08,
   "platform_fee": 0.015,
-  "ideal_persona": "teacher",
+  "franchise_fee": 45000,
+  "total_investment_range": {
+    "min": 120000,
+    "max": 180000
+  },
+  "financial": {
+    "marketing_fund_rate": 0.02,
+    "expected_breakeven_months": 12,
+    "average_unit_revenue_year_1": 280000,
+    "average_unit_revenue_year_2": 420000,
+    "average_unit_revenue_year_3": 560000,
+    "payment_terms": {
+      "royalty_billing": "monthly",
+      "royalty_due_day": 15,
+      "marketing_fund_billing": "monthly",
+      "platform_fee_billing": "monthly",
+      "accepted_methods": ["direct_debit", "bank_transfer", "credit_card"]
+    }
+  },
+  "target_customer": {
+    "primary_persona": "Education-Minded Mum",
+    "demographics": {
+      "gender": "female",
+      "age_range": [35, 55],
+      "children_ages": [7, 14],
+      "household_income_aud": 120000,
+      "education": "tertiary_educated"
+    },
+    "psychographics": [
+      "Values education and extracurricular development",
+      "Concerned about screen time and wants productive tech engagement",
+      "Seeks structured enrichment beyond school curriculum",
+      "Active on social media and local community groups",
+      "Willing to invest in children's future career readiness"
+    ]
+  },
   "territory_rules": {
-    "min_population": 50000,
-    "max_radius_km": 15,
-    "min_school_density": 10,
-    "max_units_per_territory": 3
+    "model": "exclusive",
+    "default_radius_km": 5,
+    "min_households": 8000,
+    "min_schools_in_zone": 5,
+    "overlap_policy": "no_overlap",
+    "transfer_cooldown_months": 24,
+    "right_of_first_refusal": true
   },
   "onboarding_checklist": [
-    "territory_assignment",
-    "document_signing",
-    "training_schedule",
-    "system_access",
-    "marketing_setup",
-    "location_setup",
-    "soft_launch",
-    "grand_opening"
+    {
+      "id": "franchise_agreement",
+      "title": "Sign Franchise Agreement",
+      "category": "legal",
+      "required": true,
+      "due_offset_days": 0,
+      "description": "Execute the franchise agreement and pay the initial franchise fee of $45,000 AUD."
+    },
+    {
+      "id": "wwcc_clearance",
+      "title": "Working With Children Check (WWCC)",
+      "category": "compliance",
+      "required": true,
+      "due_offset_days": 14,
+      "description": "Obtain WWCC clearance or country-equivalent child safety screening for all staff who will interact with children."
+    },
+    {
+      "id": "curriculum_training",
+      "title": "Curriculum Training Program",
+      "category": "training",
+      "required": true,
+      "due_offset_days": 30,
+      "description": "Complete the 5-day intensive curriculum training at Sydney HQ covering all four age group programs and delivery methodology."
+    },
+    {
+      "id": "tech_setup",
+      "title": "Technology Platform Setup",
+      "category": "operations",
+      "required": true,
+      "due_offset_days": 21,
+      "description": "Configure POS, booking system, CRM, Samurai Learn LMS, and parent communication portal with HQ support."
+    },
+    {
+      "id": "site_fitout",
+      "title": "Centre Fit-Out and Equipment",
+      "category": "operations",
+      "required": true,
+      "due_offset_days": 60,
+      "description": "Complete centre fit-out per brand standards including workstations, robotics kits, signage, and child safety compliance."
+    },
+    {
+      "id": "insurance",
+      "title": "Business Insurance",
+      "category": "legal",
+      "required": true,
+      "due_offset_days": 30,
+      "description": "Obtain public liability ($20M minimum), professional indemnity, and contents insurance meeting coverage requirements."
+    },
+    {
+      "id": "marketing_launch_plan",
+      "title": "Pre-Launch Marketing Plan",
+      "category": "marketing",
+      "required": true,
+      "due_offset_days": 45,
+      "description": "Develop and submit 90-day launch marketing plan using the marketing playbook template with $15,000 AUD budget."
+    },
+    {
+      "id": "staff_recruitment",
+      "title": "Recruit and Train Instructors",
+      "category": "operations",
+      "required": true,
+      "due_offset_days": 45,
+      "description": "Hire minimum 2 qualified instructors and complete onboarding including WWCC, first aid certification, and curriculum delivery training."
+    },
+    {
+      "id": "school_partnerships",
+      "title": "Establish School Partnerships",
+      "category": "marketing",
+      "required": false,
+      "due_offset_days": 60,
+      "description": "Approach and establish partnerships with at least 3 local schools for workshops or after-school programs."
+    },
+    {
+      "id": "soft_launch",
+      "title": "Soft Launch Event",
+      "category": "marketing",
+      "required": true,
+      "due_offset_days": 75,
+      "description": "Host a free community open day with trial classes to generate initial enrolments and local awareness."
+    }
   ],
+  "compliance": {
+    "child_safe_standards": {
+      "required": true,
+      "framework": "National Principles for Child Safe Organisations",
+      "checks_required": ["wwcc", "police_check", "first_aid_certificate", "mandatory_reporter_training"],
+      "audit_frequency": "quarterly",
+      "incident_reporting": "immediate",
+      "minimum_staff_ratio": {
+        "mini_coders": "1:4",
+        "junior_coders": "1:5",
+        "senior_coders": "1:6",
+        "teen_tech": "1:8"
+      }
+    },
+    "data_privacy": {
+      "framework": "Australian Privacy Act 1988",
+      "children_data_consent": "parent_guardian_required",
+      "data_retention_years": 7,
+      "pipeda_compliance_ca": true,
+      "egypt_data_protection_law": true
+    },
+    "operational": {
+      "min_operating_hours_per_week": 20,
+      "quality_audit_frequency": "biannual",
+      "mystery_shopper": true,
+      "nps_survey_frequency": "termly",
+      "curriculum_update_compliance_days": 30
+    }
+  },
   "messaging": {
-    "slack_enabled": true,
-    "sms_enabled": true,
-    "whatsapp_enabled": false
+    "mission": "Empowering the next generation with future-ready skills through hands-on coding, robotics, and AI education.",
+    "vision": "A world where every child has the skills and confidence to shape the future through technology.",
+    "elevator_pitch": "Skill Samurai is Australia's leading STEM enrichment franchise, teaching kids aged 5-17 to code, build robots, and understand AI through hands-on classes that parents trust and kids love.",
+    "value_propositions": [
+      "Small class sizes with qualified instructors ensure personalised attention for every child.",
+      "A structured, globally-recognised curriculum that builds skills progressively from age 5 to 17.",
+      "Hands-on, project-based learning that keeps kids engaged while building real-world skills.",
+      "A safe, supportive environment where children develop confidence alongside technical ability.",
+      "Holiday camps and birthday parties add variety and additional revenue streams for franchisees."
+    ],
+    "parent_pain_points": [
+      "My child spends too much time on screens without learning anything useful.",
+      "School doesn't teach enough about technology and future careers.",
+      "I want structured activities, not just free play.",
+      "I need a safe after-school option that's also educational."
+    ],
+    "channels": {
+      "slack_enabled": true,
+      "sms_enabled": true,
+      "whatsapp_enabled": true,
+      "parent_app_enabled": true
+    }
   },
   "integrations": {
-    "clerk_org_id": null,
-    "twilio_phone": null,
-    "slack_webhook_url": null
+    "crm": {
+      "provider": "HubSpot",
+      "sync_frequency": "realtime",
+      "objects_synced": ["contacts", "deals", "companies"],
+      "clerk_org_id": null
+    },
+    "booking": {
+      "provider": "Acuity Scheduling",
+      "features": ["class_booking", "trial_booking", "holiday_camp_registration", "birthday_party_booking"]
+    },
+    "lms": {
+      "provider": "custom",
+      "name": "Samurai Learn",
+      "features": ["curriculum_delivery", "student_progress", "badge_system", "parent_portal"]
+    },
+    "payments": {
+      "provider": "Stripe",
+      "supported_currencies": ["AUD", "CAD", "EGP"],
+      "recurring_billing": true,
+      "invoice_generation": true
+    },
+    "communications": {
+      "email": "SendGrid",
+      "sms": "Twilio",
+      "parent_app": "custom",
+      "slack_webhook_url": null,
+      "twilio_phone": null,
+      "features": ["class_reminders", "progress_reports", "term_notifications", "marketing_campaigns"]
+    },
+    "analytics": {
+      "provider": "Mixpanel",
+      "dashboards": ["enrolment_funnel", "retention", "revenue", "class_utilisation", "nps"]
+    },
+    "accounting": {
+      "provider": "Xero",
+      "sync_frequency": "daily",
+      "features": ["royalty_calculation", "revenue_reporting", "expense_tracking"]
+    }
+  },
+  "support": {
+    "channels": ["email", "phone", "in_app_chat", "knowledge_base"],
+    "sla_response_hours": {
+      "critical": 2,
+      "high": 8,
+      "normal": 24,
+      "low": 72
+    },
+    "field_support_visits_per_year": 4,
+    "annual_conference": true,
+    "peer_network": true
   }
 }

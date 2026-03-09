@@ -1,0 +1,21 @@
+{
+  "type": "lead_campaign",
+  "required_fields": ["campaign_name", "target_audience", "channel"],
+  "default_agents": [
+    "CAMPAIGN_AGENT",
+    "EMAIL_AGENT",
+    "CONTENT_STRATEGY_AGENT"
+  ],
+  "estimated_duration_days": 7,
+  "success_metrics": [
+    "leads_generated",
+    "email_open_rate",
+    "conversion_rate",
+    "cost_per_lead"
+  ],
+  "rollback_steps": [
+    "pause_campaign",
+    "stop_email_sequences",
+    "notify_stakeholders"
+  ]
+}

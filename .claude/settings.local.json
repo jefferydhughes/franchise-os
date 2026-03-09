@@ -16,7 +16,15 @@
       "Bash(npm install:*)",
       "Bash(npx tsc:*)",
       "Bash(npx next:*)",
-      "Bash(vercel:*)"
+      "Bash(vercel:*)",
+      "Bash(supabase:*)",
+      "Bash(npx supabase:*)",
+      "Bash(npx ts-node:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npm:*)",
+      "WebFetch(domain:dashboard-app-five-steel.vercel.app)",
+      "Bash(npx vercel:*)",
+      "Bash(curl:*)"
     ]
   }
 }

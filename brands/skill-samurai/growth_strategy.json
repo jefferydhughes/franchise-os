@@ -1,0 +1,49 @@
+{
+  "brand": "Skill Samurai",
+  "target_units": {
+    "year_1": 10,
+    "year_3": 50,
+    "year_5": 150
+  },
+  "priority_markets": [
+    {
+      "region": "Northeast US",
+      "priority": "high",
+      "target_units": 5,
+      "notes": "Dense population, high income demographics"
+    },
+    {
+      "region": "Southeast US",
+      "priority": "medium",
+      "target_units": 3,
+      "notes": "Growing population, lower competition"
+    },
+    {
+      "region": "West Coast US",
+      "priority": "medium",
+      "target_units": 2,
+      "notes": "High demand, premium pricing possible"
+    }
+  ],
+  "ideal_franchisee_persona": {
+    "background": [
+      "Business management experience",
+      "Sales or marketing background",
+      "Community involvement"
+    ],
+    "financial_requirements": {
+      "min_net_worth": 500000,
+      "min_liquid_capital": 150000,
+      "currency": "USD"
+    },
+    "traits": [
+      "Entrepreneurial mindset",
+      "Strong work ethic",
+      "Community-oriented",
+      "Coachable",
+      "Financially disciplined"
+    ]
+  },
+  "expansion_model": "concentric",
+  "multi_unit_target_percentage": 0.3
+}

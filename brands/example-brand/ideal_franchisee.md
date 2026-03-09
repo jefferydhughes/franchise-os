@@ -1,148 +1,189 @@
 # Ideal Franchisee Profile: Skill Samurai
 
-This document defines the target profile for Skill Samurai franchise partners. It is used by sales agents, AI scoring systems, and recruitment campaigns to identify, qualify, and prioritize prospective franchisees.
+## The Education Champion
 
----
+The ideal Skill Samurai franchisee is someone who sees education as a force multiplier. They believe every child deserves access to future-ready skills and they want to build a business around that conviction. We call this persona **The Education Champion**.
 
-## Primary Persona: The Educator-Entrepreneur
-
-The ideal Skill Samurai franchisee is a mission-driven professional who sees business ownership as a vehicle for community impact. They are drawn to education, motivated by purpose, and comfortable following a proven system.
+They are not necessarily teachers -- though many are. They are parents, professionals, and community builders who combine commercial sense with a genuine desire to make a difference in children's lives.
 
 ---
 
 ## Demographics
 
-| Attribute            | Target Range                                      |
-|----------------------|---------------------------------------------------|
-| Age                  | 30-55                                             |
-| Education            | Bachelor's degree or higher                       |
-| Location             | Suburban areas with strong school populations      |
-| Household income     | $80,000+ annually                                 |
-| Net worth            | $250,000+ (including home equity)                 |
-| Liquid capital       | $50,000-$80,000 available for initial investment  |
-| Employment status    | Employed (seeking transition) or recently exited   |
-| Family status        | Often parents of school-age children               |
+| Attribute | Ideal Range |
+|---|---|
+| Age | 30-55 |
+| Parental status | Parent or guardian of school-age children (preferred, not required) |
+| Education | Tertiary degree (any discipline) |
+| Liquid capital | $150,000 AUD minimum |
+| Net worth | $400,000 AUD minimum |
+| Location | Within target territory or willing to relocate |
+| Residency | Citizen or permanent resident of AU, CA, or EG |
+| Language | Fluent English; Arabic proficiency a plus for Egypt territories |
 
 ---
 
-## Psychographics
+## Ideal Background Profiles
 
-### Core Motivations
+### Profile A: The Educator (35%)
+Former or current teachers, tutors, or education administrators who want to run their own business. They bring curriculum credibility and an intuitive understanding of student engagement. They may need additional support on business operations and marketing.
 
-- **Purpose over profit.** They want to build something meaningful, not just generate income. Financial returns matter, but mission alignment is the hook.
-- **Community impact.** They want to be known and respected in their local area. They see themselves as contributing to the next generation.
-- **Autonomy with structure.** They want to run their own business but do not want to build everything from scratch. A franchise system appeals because it reduces risk.
-- **Legacy building.** Many are thinking about long-term wealth creation and building an asset they can grow over 5-10 years.
+**Strengths:** Classroom management, parent communication, curriculum delivery
+**Development areas:** Financial management, sales, digital marketing
 
-### Personality Traits
+### Profile B: The Tech Professional (25%)
+IT professionals, software developers, or engineers who are passionate about STEM education. They understand the subject matter deeply and often have children who inspired their interest in the franchise. They typically bring strong analytical skills and digital literacy.
 
-- Organised and process-oriented
-- Comfortable with technology (does not need to be a programmer)
-- Strong interpersonal skills and natural relationship builders
-- Patient, with realistic expectations about business growth timelines
-- Coachable and willing to follow the franchise system
+**Strengths:** Technical credibility, data-driven decision making, technology adoption
+**Development areas:** People management, community engagement, classroom dynamics
 
----
+### Profile C: The Corporate Parent (25%)
+Mid-to-senior professionals from corporate backgrounds (marketing, finance, operations, HR) who are looking for a meaningful career change. They are often motivated by wanting a better work-life balance while making a community impact. They bring strong business acumen.
 
-## Professional Background
+**Strengths:** Business operations, financial planning, professional networking
+**Development areas:** Education sector knowledge, direct customer engagement, instructor management
 
-The strongest franchise partners tend to come from these backgrounds:
+### Profile D: The Community Builder (15%)
+Individuals with backgrounds in community services, not-for-profit leadership, or local government. They have strong local networks and a deep understanding of community needs. They are energised by the social impact dimension of the franchise.
 
-| Background                  | Why It Works                                                        |
-|-----------------------------|---------------------------------------------------------------------|
-| Teachers / Educators        | Natural affinity for the mission. Understand student engagement.    |
-| School administrators       | Operational experience. Community networks already in place.        |
-| Corporate trainers          | Comfortable delivering structured programs. Sales-adjacent skills.  |
-| STEM professionals          | Technical credibility. Often parents looking for a lifestyle shift. |
-| Small business owners       | Understand P&L management, hiring, local marketing.                |
-| Military veterans           | Disciplined, system-oriented, strong leadership skills.            |
-| Stay-at-home parents        | Community connections, flexible schedule, motivated to re-enter workforce. |
-
-### Experience Requirements
-
-- Minimum 3 years of professional work experience in any field.
-- Management or team leadership experience preferred but not required.
-- No prior coding or STEM background required; full training is provided.
-- Prior business ownership experience is a plus but not a prerequisite.
+**Strengths:** Community relationships, stakeholder engagement, local partnerships
+**Development areas:** Commercial discipline, scaling operations, technology adoption
 
 ---
 
-## Financial Requirements
+## Financial Requirements (AUD)
 
-| Requirement              | Amount / Range          |
-|--------------------------|-------------------------|
-| Initial franchise fee    | $35,000-$45,000         |
-| Total initial investment | $80,000-$150,000        |
-| Liquid capital required  | $50,000 minimum         |
-| Net worth required       | $250,000 minimum        |
-| Royalty rate             | 7% of gross revenue     |
-| Platform fee             | 1.5% of gross revenue   |
-| Expected breakeven       | 12-18 months            |
+### Initial Investment
 
-Candidates must be able to demonstrate access to sufficient capital through personal savings, home equity lines of credit, SBA loans, or retirement account rollovers (ROBS). Third-party financing referrals are available.
+| Component | Amount |
+|---|---|
+| Franchise fee | $45,000 |
+| Centre fit-out and equipment | $35,000-$55,000 |
+| Technology and software setup | $8,000-$12,000 |
+| Initial marketing (90-day launch) | $15,000 |
+| Working capital (6 months) | $15,000-$25,000 |
+| Insurance and legal | $5,000-$8,000 |
+| Training travel (if outside Sydney) | $2,000-$5,000 |
+| **Total investment range** | **$120,000-$180,000** |
+
+### Ongoing Fees
+
+| Fee | Rate | Billing |
+|---|---|---|
+| Royalty | 8% of gross revenue | Monthly |
+| Marketing fund | 2% of gross revenue | Monthly |
+| Platform fee | 1.5% of gross revenue | Monthly |
+| Technology licence | Included in platform fee | -- |
+
+### Financial Capacity Verification
+Candidates must provide:
+- Bank statements (90 days)
+- Evidence of liquid capital ($150,000 minimum)
+- Personal financial statement
+- Credit check authorisation
+- Evidence of funding source (savings, equity, approved loan)
+
+---
+
+## Core Competencies and Scoring
+
+Each candidate is assessed across eight competencies on a 1-5 scale. Minimum composite score: 28/40.
+
+| Competency | Weight | Description |
+|---|---|---|
+| Mission alignment | 1.5x | Genuine passion for children's education and STEM |
+| Business acumen | 1.2x | Understanding of P&L, cash flow, and growth levers |
+| Community engagement | 1.2x | Ability to build local relationships and partnerships |
+| People management | 1.0x | Experience hiring, training, and leading small teams |
+| Sales aptitude | 1.0x | Comfort with consultative selling and enrolment conversations |
+| Resilience | 1.0x | Demonstrated ability to persevere through business challenges |
+| Coachability | 1.0x | Willingness to follow the system and accept feedback |
+| Financial readiness | 1.0x | Meets all financial thresholds without over-leveraging |
+
+### Scoring Thresholds
+- **36-40:** Exceptional candidate. Fast-track to Discovery Day.
+- **32-35:** Strong candidate. Standard process.
+- **28-31:** Qualified candidate. Additional interviews recommended.
+- **Below 28:** Does not meet threshold. Decline or defer.
 
 ---
 
 ## Red Flags
 
-The following traits or behaviours indicate a candidate is unlikely to succeed and should be flagged during the qualification process:
+The following indicators should prompt additional scrutiny or disqualification:
 
 ### Immediate Disqualifiers
+- Criminal record involving children, fraud, or violent offences
+- Unable to obtain WWCC or equivalent clearance
+- History of bankruptcy within the past 5 years
+- Current involvement in competing education franchise
+- Refusal to participate in mandatory training
 
-- **No liquid capital.** Cannot meet the minimum $50,000 liquid capital requirement and has no viable financing path.
-- **Passive investor mindset.** Expects to hire a manager from day one and not be involved in operations. Skill Samurai requires owner-operator engagement, especially in the first 18 months.
-- **Unrealistic financial expectations.** Expects six-figure income in year one or asks about "guaranteed returns."
-- **Legal or financial red flags.** Active bankruptcy, unresolved litigation, or history of franchise agreement violations.
-
-### Caution Indicators
-
-- **No connection to education or children.** Not a disqualifier, but candidates with zero affinity for the mission tend to lose motivation during the slower early months.
-- **Inability to follow systems.** Candidates who repeatedly push back on the franchise model during discovery may struggle with brand compliance.
-- **Geographic inflexibility.** Candidates who insist on a single specific location that does not meet territory scoring thresholds.
-- **Decision paralysis.** Candidates who remain in the evaluation stage for more than 120 days without clear external blockers.
-- **Spouse or partner opposition.** If the candidate's partner is not supportive, the likelihood of follow-through drops significantly.
-
----
-
-## Scoring Criteria
-
-When evaluating candidates in the CRM, use the following weighted scoring model:
-
-| Criterion                        | Weight | Scoring Guidance                                                 |
-|----------------------------------|--------|------------------------------------------------------------------|
-| Financial qualification          | 25%    | Meets all minimums = full marks. Partial = proportional.         |
-| Mission alignment                | 20%    | Demonstrated passion for education and community impact.         |
-| Professional background          | 15%    | Relevant experience per the background table above.              |
-| Coachability                     | 15%    | Responsiveness to feedback during discovery process.             |
-| Local market knowledge           | 10%    | Existing community ties in target territory.                     |
-| Leadership / management ability  | 10%    | Evidence of leading teams or managing operations.                |
-| Speed of decision-making         | 5%     | Moves through funnel stages within expected timelines.           |
-
-### Score Interpretation
-
-| Score Range | Classification | Action                                              |
-|-------------|----------------|-----------------------------------------------------|
-| 85-100      | A-tier         | Fast-track to Discovery Day. Assign senior closer.  |
-| 70-84       | B-tier         | Standard process. Nurture with targeted content.     |
-| 55-69       | C-tier         | Additional qualification needed. Address gaps.       |
-| Below 55    | D-tier         | Deprioritize. Maintain in nurture sequence only.     |
+### Caution Flags
+- Purely passive investment mindset with no intent to be operationally involved
+- Unrealistic revenue expectations or "get rich quick" mentality
+- Inability to articulate why education matters beyond profit
+- Resistance to following established systems and brand standards
+- Over-leveraged financial position (more than 60% debt-funded)
+- No connection to or understanding of the local community
+- Frequent career changes without clear progression or rationale
+- Negative references from previous business partners or employers
+- Spouse or partner opposition to the commitment
 
 ---
 
-## Discovery Process Expectations
+## Discovery Day Process
 
-The ideal candidate moves through the following stages within 90 days:
+Discovery Day is a structured full-day event at Sydney HQ (or via video for international candidates) designed to give candidates an immersive experience of the Skill Samurai model.
 
-1. **Initial inquiry** -- Completes lead form or responds to outreach.
-2. **Qualification call** -- 20-minute call to verify financial and motivational fit.
-3. **Franchise disclosure document (FDD) review** -- Candidate receives and reviews the FDD.
-4. **Validation calls** -- Candidate speaks with 2-3 existing franchise partners.
-5. **Discovery Day** -- In-person or virtual deep-dive into operations, training, and support.
-6. **Territory selection** -- Candidate selects from available scored territories.
-7. **Agreement signing** -- Franchise agreement executed, onboarding begins.
+### Agenda
+
+| Time | Activity |
+|---|---|
+| 09:00 | Welcome and mission briefing with CEO |
+| 09:45 | Curriculum deep dive: observe a live class session |
+| 10:45 | Morning tea and informal Q&A with existing franchisees |
+| 11:15 | Business model walkthrough: unit economics, P&L, growth trajectory |
+| 12:15 | Lunch |
+| 13:00 | Technology platform demo: CRM, LMS, booking, reporting |
+| 13:45 | Territory analysis: review candidate's proposed territory |
+| 14:30 | Marketing playbook and launch support overview |
+| 15:15 | Compliance and operations: child safety, quality standards, audits |
+| 16:00 | Final Q&A and mutual assessment discussion |
+| 16:30 | Next steps and timeline |
+
+### Post-Discovery Day
+- Candidate receives a follow-up survey within 24 hours
+- Internal assessment completed within 48 hours
+- Decision communicated within 5 business days
+- If approved, franchise agreement issued with 14-day cooling-off period (30 days for Canadian provinces with disclosure requirements)
 
 ---
 
-## Summary
+## Candidate Journey Timeline
 
-The best Skill Samurai franchise partners are educator-entrepreneurs: mission-driven, financially qualified, coachable, and embedded in their local communities. They see franchise ownership not as a shortcut to wealth but as a structured path to building a purposeful, profitable business that serves families and shapes the next generation.
+| Week | Stage |
+|---|---|
+| 1 | Initial enquiry and information pack |
+| 2 | Introductory call with franchise development manager |
+| 3 | Application form and financial pre-qualification |
+| 4 | Competency interview (video or in-person) |
+| 5-6 | Reference checks and background screening |
+| 7 | Discovery Day invitation |
+| 8 | Discovery Day |
+| 9 | Approval decision and franchise agreement |
+| 10-11 | Agreement review and signing |
+| 12+ | Onboarding begins |
+
+---
+
+## Ongoing Franchisee Development
+
+Approved franchisees receive:
+- 5-day initial training at Sydney HQ
+- Dedicated launch coach for the first 90 days
+- Quarterly business reviews with regional manager
+- Annual franchisee conference and awards
+- Access to online training library and curriculum updates
+- Peer mentoring network with established franchisees
+- Monthly webinars covering marketing, operations, and pedagogy
