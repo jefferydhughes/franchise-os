@@ -31,7 +31,8 @@
       "Bash(do echo -n \"$model: \")",
       "Bash(done)",
       "Bash(for model in \"claude-haiku-4-5-20251001\" \"claude-haiku-4-5\" \"claude-haiku-4-6\")",
-      "Bash(git push origin master)"
+      "Bash(git push origin master)",
+      "mcp__claude_ai_Vercel__list_deployments"
     ]
   }
 }
