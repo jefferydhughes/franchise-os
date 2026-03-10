@@ -6,11 +6,11 @@ import { Activity, RefreshCw, Clock, Bot, Inbox } from 'lucide-react';
 interface AgentEvent {
   id: string;
   agent_name: string;
-  tier?: string;
+  model_tier?: string;
   event_type: string;
   status: 'pending' | 'processing' | 'completed' | 'failed';
+  payload?: Record<string, unknown>;
   created_at: string;
-  summary?: string;
 }
 
 const STATUS_STYLES: Record<string, { bg: string; text: string; dot: string }> = {
@@ -21,12 +21,9 @@ const STATUS_STYLES: Record<string, { bg: string; text: string; dot: string }> =
 };
 
 const TIER_COLORS: Record<string, string> = {
-  king:     'bg-amber-400',
-  queen:    'bg-purple-400',
-  bishop:   'bg-blue-400',
-  knight:   'bg-green-400',
-  rook:     'bg-red-400',
-  pawn:     'bg-slate-400',
+  strategic:   'bg-amber-400',
+  operational: 'bg-blue-400',
+  worker:      'bg-slate-400',
 };
 
 function relativeTime(dateStr: string): string {
@@ -97,7 +94,7 @@ export default function SwarmActivityFeed() {
         ) : (
           events.map((event) => {
             const status = STATUS_STYLES[event.status] ?? STATUS_STYLES.pending;
-            const tierColor = TIER_COLORS[event.tier ?? ''] ?? 'bg-slate-400';
+            const tierColor = TIER_COLORS[event.model_tier ?? ''] ?? 'bg-slate-400';
 
             return (
               <div
@@ -126,9 +123,17 @@ export default function SwarmActivityFeed() {
                   <p className="text-xs text-slate-400 truncate mt-0.5">
                     {event.event_type.replace(/_/g, ' ').replace(/\./g, ' > ')}
                   </p>
-                  {event.summary && (
-                    <p className="text-xs text-slate-500 truncate mt-0.5">{event.summary}</p>
-                  )}
+                  {event.payload && Object.keys(event.payload).length > 0 && (() => {
+                    const p = event.payload;
+                    const text = String(
+                      p.summary ?? p.message ?? p.result ?? p.action ??
+                      p.signal_type ?? p.location_label ??
+                      Object.values(p).find(v => typeof v === 'string') ?? ''
+                    );
+                    return text ? (
+                      <p className="text-xs text-slate-500 truncate mt-0.5">{text}</p>
+                    ) : null;
+                  })()}
                 </div>
 
                 {/* Timestamp */}

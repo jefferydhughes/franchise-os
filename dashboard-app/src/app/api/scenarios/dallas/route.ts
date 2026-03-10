@@ -40,49 +40,49 @@ export async function POST() {
     const territories = [
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'Dallas-Fort Worth North', region: 'Texas',
-        score: 92, grade: 'A', status: 'available',
+        score: 92, grade: 'A', status: 'open',
         demographics: { population: 485000, median_income: 95000, school_count: 127, households: 162000, family_density_score: 88, school_density_score: 91 },
         geo_data: { city: 'Plano', state: 'TX', lat: 33.0198, lng: -96.6989 },
       },
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'Dallas-Fort Worth South', region: 'Texas',
-        score: 84, grade: 'A', status: 'available',
+        score: 84, grade: 'A', status: 'open',
         demographics: { population: 390000, median_income: 78000, school_count: 98, households: 134000, family_density_score: 82, school_density_score: 79 },
         geo_data: { city: 'Arlington', state: 'TX', lat: 32.7357, lng: -97.1081 },
       },
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'Austin Central', region: 'Texas',
-        score: 88, grade: 'A', status: 'in_progress',
+        score: 88, grade: 'A', status: 'reserved',
         demographics: { population: 520000, median_income: 102000, school_count: 145, households: 195000, family_density_score: 85, school_density_score: 93 },
         geo_data: { city: 'Austin', state: 'TX', lat: 30.2672, lng: -97.7431 },
       },
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'Houston West', region: 'Texas',
-        score: 76, grade: 'B', status: 'available',
+        score: 76, grade: 'B', status: 'open',
         demographics: { population: 610000, median_income: 72000, school_count: 168, households: 210000, family_density_score: 74, school_density_score: 81 },
         geo_data: { city: 'Katy', state: 'TX', lat: 29.7858, lng: -95.8245 },
       },
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'San Antonio Northeast', region: 'Texas',
-        score: 71, grade: 'B', status: 'available',
+        score: 71, grade: 'B', status: 'open',
         demographics: { population: 340000, median_income: 68000, school_count: 89, households: 118000, family_density_score: 72, school_density_score: 68 },
         geo_data: { city: 'San Antonio', state: 'TX', lat: 29.4241, lng: -98.4936 },
       },
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'Denver Metro', region: 'Colorado',
-        score: 79, grade: 'B', status: 'available',
+        score: 79, grade: 'B', status: 'open',
         demographics: { population: 445000, median_income: 88000, school_count: 112, households: 172000, family_density_score: 78, school_density_score: 84 },
         geo_data: { city: 'Denver', state: 'CO', lat: 39.7392, lng: -104.9903 },
       },
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'Phoenix East Valley', region: 'Arizona',
-        score: 65, grade: 'C', status: 'available',
+        score: 65, grade: 'C', status: 'open',
         demographics: { population: 380000, median_income: 62000, school_count: 95, households: 130000, family_density_score: 65, school_density_score: 62 },
         geo_data: { city: 'Mesa', state: 'AZ', lat: 33.4152, lng: -111.8315 },
       },
       {
         id: randomUUID(), brand_id: BRAND_ID, name: 'Nashville Metro', region: 'Tennessee',
-        score: 82, grade: 'A', status: 'assigned',
+        score: 82, grade: 'A', status: 'active',
         demographics: { population: 410000, median_income: 76000, school_count: 108, households: 152000, family_density_score: 80, school_density_score: 77 },
         geo_data: { city: 'Nashville', state: 'TN', lat: 36.1627, lng: -86.7816 },
       },
@@ -290,7 +290,7 @@ export async function POST() {
       // detected (2)
       {
         id: randomUUID(), brand_id: BRAND_ID, title: 'Phoenix East Valley STEM Gap Analysis',
-        type: 'territory_expansion', status: 'detected', agent_assigned: 'MARKET_OPPORTUNITY_AGENT',
+        type: 'territory_outreach', status: 'detected', agent_assigned: 'MARKET_OPPORTUNITY_AGENT',
         evidence: [{ type: 'search_volume', trend: '+120% YoY' }],
         action_plan: [{ step: 1, action: 'Demographic deep dive', status: 'pending' }],
         data: { source: 'market_scan' }, created_at: ago(720),
@@ -394,7 +394,7 @@ export async function POST() {
       {
         id: randomUUID(), brand_id: BRAND_ID, title: 'Nashville Market Entry — Complete',
         type: 'territory_outreach', status: 'learning_review', agent_assigned: 'CEO_AGENT',
-        outcome: 'Franchisee signed — Emily Davis',
+        outcome: 'win',
         evidence: [{ type: 'territory_score', score: 82 }, { type: 'conversion', timeline_weeks: 12 }],
         action_plan: [
           { step: 1, action: 'Territory scoring', status: 'completed' },
@@ -408,7 +408,7 @@ export async function POST() {
       {
         id: randomUUID(), brand_id: BRAND_ID, title: 'Facebook Ad Creative Test — Jan 2026',
         type: 'campaign_optimization', status: 'learning_review', agent_assigned: 'CMO_AGENT',
-        outcome: 'Video testimonials outperform static by 2.3x',
+        outcome: 'win',
         evidence: [{ type: 'ab_test', winner: 'video_testimonial', lift: 0.23 }],
         action_plan: [
           { step: 1, action: 'Creative variants', status: 'completed' },

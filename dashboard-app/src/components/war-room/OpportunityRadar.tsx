@@ -37,6 +37,7 @@ export default function OpportunityRadar() {
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       const items: Opportunity[] = (Array.isArray(data) ? data : data.events ?? [])
+        .filter((e: Record<string, unknown>) => e.event_type === 'opportunity.detected')
         .map((e: Record<string, unknown>) => ({
           id: e.id,
           signal_type: (e.payload as Record<string, unknown>)?.signal_type ?? (e as Record<string, unknown>).signal_type ?? 'lead_cluster',

@@ -21,7 +21,7 @@ import {
 
 const NAV_ITEMS = [
   { href: '/',            label: 'War Room',    icon: Swords },
-  { href: '/territories', label: 'Territories', icon: MapPin },
+  { href: '/territory',   label: 'Territories', icon: MapPin },
   { href: '/leads',       label: 'Leads',       icon: Users },
   { href: '/franchisees', label: 'Franchisees', icon: UserCheck },
   { href: '/campaigns',   label: 'Campaigns',   icon: Megaphone },
