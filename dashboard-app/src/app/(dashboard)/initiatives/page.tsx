@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import type { Initiative } from '@/types/franchise-os';
 
-const BRAND_ID = '00000000-0000-0000-0000-000000000001'; // placeholder
+const BRAND_ID = '6b66fd67-aa7e-46ab-9262-60ccfd3339c8'; // skill-samurai
 
 const INITIATIVE_TYPES = [
   'territory_expansion',
