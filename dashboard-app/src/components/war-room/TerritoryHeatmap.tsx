@@ -12,10 +12,7 @@ interface Territory {
   status: string;
   population: number;
   median_income: number;
-}
-
-interface TerritoryHeatmapProps {
-  brandId: string;
+  demographics?: { population?: number; median_income?: number };
 }
 
 const GRADE_STYLES: Record<string, { bg: string; text: string; border: string }> = {
@@ -35,24 +32,28 @@ function formatCurrency(n: number): string {
   return `$${formatNumber(n)}`;
 }
 
-export default function TerritoryHeatmap({ brandId }: TerritoryHeatmapProps) {
+export default function TerritoryHeatmap() {
   const [territories, setTerritories] = useState<Territory[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTerritories = useCallback(async () => {
     try {
-      const res = await fetch(`/api/territories?brandId=${brandId}`);
+      const res = await fetch('/api/territories');
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
-      const items: Territory[] = (Array.isArray(data) ? data : data.territories ?? [])
-        .sort((a: Territory, b: Territory) => b.score - a.score);
+      const raw = Array.isArray(data) ? data : data.territories ?? [];
+      const items: Territory[] = raw.map((t: Record<string, unknown>) => ({
+        ...t,
+        population: (t.demographics as Record<string, number>)?.population ?? t.population ?? 0,
+        median_income: (t.demographics as Record<string, number>)?.median_income ?? t.median_income ?? 0,
+      })).sort((a: Territory, b: Territory) => b.score - a.score);
       setTerritories(items);
     } catch {
       // Keep existing data
     } finally {
       setLoading(false);
     }
-  }, [brandId]);
+  }, []);
 
   useEffect(() => {
     fetchTerritories();

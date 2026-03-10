@@ -14,8 +14,6 @@ import {
 } from 'lucide-react';
 import type { Lead } from '@/types/franchise-os';
 
-const BRAND_ID = '00000000-0000-0000-0000-000000000001'; // placeholder
-
 const STATUS_OPTIONS = [
   { value: 'all',       label: 'All Statuses' },
   { value: 'new',       label: 'New' },
@@ -53,7 +51,6 @@ export default function LeadsPage() {
     setLoading(true);
     try {
       const params = new URLSearchParams({
-        brandId: BRAND_ID,
         status: statusFilter,
         limit: '50',
       });

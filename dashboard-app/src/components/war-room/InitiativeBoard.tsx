@@ -13,10 +13,6 @@ interface Initiative {
   created_at: string;
 }
 
-interface InitiativeBoardProps {
-  brandId: string;
-}
-
 const COLUMNS = [
   { key: 'detected',        label: 'Detected',        dot: 'bg-slate-400' },
   { key: 'recommended',     label: 'Recommended',     dot: 'bg-amber-400' },
@@ -37,13 +33,13 @@ function formatType(type: string): string {
   return type.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-export default function InitiativeBoard({ brandId }: InitiativeBoardProps) {
+export default function InitiativeBoard() {
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchInitiatives = useCallback(async () => {
     try {
-      const res = await fetch(`/api/initiatives?brandId=${brandId}`);
+      const res = await fetch('/api/initiatives');
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setInitiatives(Array.isArray(data) ? data : data.initiatives ?? []);
@@ -52,7 +48,7 @@ export default function InitiativeBoard({ brandId }: InitiativeBoardProps) {
     } finally {
       setLoading(false);
     }
-  }, [brandId]);
+  }, []);
 
   useEffect(() => {
     fetchInitiatives();

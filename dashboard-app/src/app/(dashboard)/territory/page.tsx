@@ -13,8 +13,6 @@ import {
 } from 'lucide-react';
 import type { Territory } from '@/types/franchise-os';
 
-const BRAND_ID = '00000000-0000-0000-0000-000000000001'; // placeholder
-
 const GRADE_STYLES: Record<string, { bg: string; text: string; border: string }> = {
   A: { bg: 'bg-green-500/15', text: 'text-green-400', border: 'border-green-500/30' },
   B: { bg: 'bg-blue-500/15',  text: 'text-blue-400',  border: 'border-blue-500/30' },
@@ -39,7 +37,7 @@ export default function TerritoryPage() {
 
   const fetchTerritories = useCallback(async () => {
     try {
-      const res = await fetch(`/api/territories?brandId=${BRAND_ID}`);
+      const res = await fetch('/api/territories');
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       const items: Territory[] = (Array.isArray(data) ? data : data.territories ?? [])

@@ -13,10 +13,6 @@ interface Opportunity {
   created_at: string;
 }
 
-interface OpportunityRadarProps {
-  brandId: string;
-}
-
 const SIGNAL_CONFIG: Record<string, { icon: typeof MapPin; color: string; bg: string; label: string }> = {
   lead_cluster:        { icon: Users,      color: 'text-blue-400',   bg: 'bg-blue-500/15',   label: 'Lead Cluster' },
   territory_threshold: { icon: MapPin,     color: 'text-green-400',  bg: 'bg-green-500/15',  label: 'Territory Threshold' },
@@ -31,15 +27,13 @@ function scoreColor(score: number): string {
   return 'bg-red-500';
 }
 
-export default function OpportunityRadar({ brandId }: OpportunityRadarProps) {
+export default function OpportunityRadar() {
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchOpportunities = useCallback(async () => {
     try {
-      const res = await fetch(
-        `/api/agent-events?brandId=${brandId}&event_type=opportunity.detected`
-      );
+      const res = await fetch('/api/agent-events');
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       const items: Opportunity[] = (Array.isArray(data) ? data : data.events ?? [])
@@ -59,7 +53,7 @@ export default function OpportunityRadar({ brandId }: OpportunityRadarProps) {
     } finally {
       setLoading(false);
     }
-  }, [brandId]);
+  }, []);
 
   useEffect(() => {
     fetchOpportunities();

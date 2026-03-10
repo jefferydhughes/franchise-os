@@ -13,10 +13,6 @@ interface AgentEvent {
   summary?: string;
 }
 
-interface SwarmActivityFeedProps {
-  brandId: string;
-}
-
 const STATUS_STYLES: Record<string, { bg: string; text: string; dot: string }> = {
   pending:    { bg: 'bg-amber-500/10', text: 'text-amber-400', dot: 'bg-amber-400' },
   processing: { bg: 'bg-blue-500/10',  text: 'text-blue-400',  dot: 'bg-blue-400' },
@@ -46,13 +42,13 @@ function relativeTime(dateStr: string): string {
   return `${diffDay}d ago`;
 }
 
-export default function SwarmActivityFeed({ brandId }: SwarmActivityFeedProps) {
+export default function SwarmActivityFeed() {
   const [events, setEvents] = useState<AgentEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchEvents = useCallback(async () => {
     try {
-      const res = await fetch(`/api/agents?brandId=${brandId}`);
+      const res = await fetch('/api/agents');
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setEvents(Array.isArray(data) ? data : data.events ?? []);
@@ -61,7 +57,7 @@ export default function SwarmActivityFeed({ brandId }: SwarmActivityFeedProps) {
     } finally {
       setLoading(false);
     }
-  }, [brandId]);
+  }, []);
 
   useEffect(() => {
     fetchEvents();

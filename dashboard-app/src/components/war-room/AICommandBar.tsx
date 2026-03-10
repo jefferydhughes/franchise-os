@@ -8,11 +8,7 @@ interface CommandResponse {
   actions?: { label: string; action: string; payload?: Record<string, unknown> }[];
 }
 
-interface AICommandBarProps {
-  brandId: string;
-}
-
-export default function AICommandBar({ brandId }: AICommandBarProps) {
+export default function AICommandBar() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<CommandResponse | null>(null);
@@ -31,7 +27,7 @@ export default function AICommandBar({ brandId }: AICommandBarProps) {
       const res = await fetch('/api/command', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, brandId }),
+        body: JSON.stringify({ message }),
       });
 
       if (!res.ok) {
@@ -46,7 +42,7 @@ export default function AICommandBar({ brandId }: AICommandBarProps) {
     } finally {
       setLoading(false);
     }
-  }, [input, loading, brandId]);
+  }, [input, loading]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {

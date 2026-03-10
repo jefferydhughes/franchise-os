@@ -7,8 +7,6 @@ import TerritoryHeatmap from '@/components/war-room/TerritoryHeatmap';
 import InitiativeBoard from '@/components/war-room/InitiativeBoard';
 import MemoryWidget from '@/components/war-room/MemoryWidget';
 
-const BRAND_ID = '00000000-0000-0000-0000-000000000001'; // placeholder
-
 export default function WarRoomPage() {
   return (
     <div className="space-y-6">
@@ -21,32 +19,32 @@ export default function WarRoomPage() {
 
       {/* Row 1: AI Command Bar — full width */}
       <div>
-        <AICommandBar brandId={BRAND_ID} />
+        <AICommandBar />
       </div>
 
       {/* Row 2: Opportunity Radar (2/3) + Swarm Activity Feed (1/3) */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <OpportunityRadar brandId={BRAND_ID} />
+          <OpportunityRadar />
         </div>
         <div>
-          <SwarmActivityFeed brandId={BRAND_ID} />
+          <SwarmActivityFeed />
         </div>
       </div>
 
       {/* Row 3: Territory Heatmap (1/3) + Initiative Board (2/3) */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div>
-          <TerritoryHeatmap brandId={BRAND_ID} />
+          <TerritoryHeatmap />
         </div>
         <div className="lg:col-span-2">
-          <InitiativeBoard brandId={BRAND_ID} />
+          <InitiativeBoard />
         </div>
       </div>
 
       {/* Row 4: Memory Widget — full width */}
       <div>
-        <MemoryWidget brandId={BRAND_ID} />
+        <MemoryWidget />
       </div>
     </div>
   );

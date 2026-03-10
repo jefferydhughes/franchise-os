@@ -10,10 +10,6 @@ interface MemoryEntry {
   created_at: string;
 }
 
-interface MemoryWidgetProps {
-  brandId: string;
-}
-
 const LAYER_STYLES: Record<string, { bg: string; text: string }> = {
   episodic:       { bg: 'bg-blue-500/15',    text: 'text-blue-400' },
   semantic:       { bg: 'bg-purple-500/15',   text: 'text-purple-400' },
@@ -41,14 +37,14 @@ function relativeTime(dateStr: string): string {
   return `${diffDay}d ago`;
 }
 
-export default function MemoryWidget({ brandId }: MemoryWidgetProps) {
+export default function MemoryWidget() {
   const [entries, setEntries] = useState<MemoryEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
 
   const fetchEntries = useCallback(async () => {
     try {
-      const res = await fetch(`/api/memory?brandId=${brandId}`);
+      const res = await fetch('/api/memory');
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setEntries(Array.isArray(data) ? data : data.entries ?? []);
@@ -57,7 +53,7 @@ export default function MemoryWidget({ brandId }: MemoryWidgetProps) {
     } finally {
       setLoading(false);
     }
-  }, [brandId]);
+  }, []);
 
   useEffect(() => {
     fetchEntries();

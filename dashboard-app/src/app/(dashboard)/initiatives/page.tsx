@@ -11,8 +11,6 @@ import {
 } from 'lucide-react';
 import type { Initiative } from '@/types/franchise-os';
 
-const BRAND_ID = '6b66fd67-aa7e-46ab-9262-60ccfd3339c8'; // skill-samurai
-
 const INITIATIVE_TYPES = [
   'territory_expansion',
   'lead_campaign',
@@ -63,7 +61,7 @@ export default function InitiativesPage() {
 
   const fetchInitiatives = useCallback(async () => {
     try {
-      const res = await fetch(`/api/initiatives?brandId=${BRAND_ID}`);
+      const res = await fetch('/api/initiatives');
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setInitiatives(Array.isArray(data) ? data : data.initiatives ?? []);
@@ -88,7 +86,6 @@ export default function InitiativesPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          brand_id: BRAND_ID,
           title: title.trim(),
           type,
           description: description.trim(),
