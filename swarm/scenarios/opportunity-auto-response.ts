@@ -253,7 +253,7 @@ async function step2_ceoEvaluation(
   const brandContext = `Brand: Skill Samurai | Industry: Education/STEM Franchising | Slug: ${BRAND_SLUG}`;
 
   const { text, durationMs, mocked } = await callClaude(
-    'claude-sonnet-4-5-20250514',
+    'claude-sonnet-4-6',
     ceoPrompt + '\n\n' + brandContext,
     `Evaluate this expansion signal and decide whether to pursue:\n\n` +
     `Signal Type: ${signal.signal_type}\n` +
@@ -268,7 +268,7 @@ async function step2_ceoEvaluation(
   await emitAgentEvent(
     'ceo', 'opportunity_evaluation', correlationId, 0,
     { signal_id: signal.id, decision: text },
-    'strategic', 'claude-sonnet-4-5-20250514', durationMs,
+    'strategic', 'claude-sonnet-4-6', durationMs,
   );
 
   console.log(`  ${mocked ? '🎭 [DEMO]' : '🤖 [LIVE]'} Response (${durationMs}ms):`);
