@@ -1,4 +1,4 @@
-''use client';
+'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import {
@@ -29,7 +29,7 @@ interface Opportunity {
 }
 
 interface OpportunityRadarProps {
-  brandId: string;
+  brandId?: string;
 }
 
 const SIGNAL_CONFIG: Record<string, { icon: typeof MapPin; color: string; bg: string; label: string }> = {

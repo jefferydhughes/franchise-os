@@ -1,0 +1,14 @@
+{
+  "name": "commandos-hq",
+  "version": "1.0.0",
+  "description": "Operative HQ — Commandos-themed Claude Code agent dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "install-hooks": "node install-hooks.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "ws": "^8.18.0"
+  }
+}

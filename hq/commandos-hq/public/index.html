@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPERATIVE HQ — Agent Command</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☠</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@400;600;700&family=Special+Elite&display=swap');
+
+:root {
+  --olive: #4a5c2a;
+  --olive-dark: #2d3a18;
+  --olive-light: #6b7c3e;
+  --sand: #c8a96e;
+  --sand-light: #e8d4a0;
+  --sand-dark: #8a6f3e;
+  --khaki: #8b7355;
+  --dirt: #5c4a2a;
+  --black: #0a0a08;
+  --red: #8b1a1a;
+  --red-bright: #c0392b;
+  --green-hud: #39ff14;
+  --amber: #ffb347;
+  --fog: rgba(20, 25, 10, 0.85);
+  --panel-bg: rgba(10, 12, 6, 0.92);
+  --border: #4a5c2a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--black);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--sand-light);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  cursor: crosshair;
+}
+
+/* ─── SCANLINES ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── VIGNETTE ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ─── LAYOUT ─── */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 260px;
+  grid-template-rows: 48px 1fr 170px;
+  height: 100vh;
+  width: 100vw;
+  gap: 0;
+}
+
+/* ─── TOP BAR ─── */
+.topbar {
+  grid-column: 1 / -1;
+  background: var(--olive-dark);
+  border-bottom: 2px solid var(--olive-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.topbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px);
+}
+
+.title-block { display: flex; align-items: center; gap: 12px; }
+
+.title-skull { font-size: 20px; filter: drop-shadow(0 0 4px var(--red-bright)); }
+
+.title-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--sand);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.title-sub {
+  font-size: 9px;
+  color: var(--olive-light);
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.conn-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.conn-dot.connected { background: var(--green-hud); box-shadow: 0 0 6px var(--green-hud); }
+.conn-dot.disconnected { background: var(--red-bright); box-shadow: 0 0 6px var(--red-bright); animation: blink 1s infinite; }
+.conn-dot.demo { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+
+.topbar-status {
+  display: flex;
+  gap: 24px;
+  font-size: 11px;
+  color: var(--olive-light);
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.status-val {
+  color: var(--green-hud);
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.clock {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  color: var(--amber);
+  letter-spacing: 2px;
+}
+
+/* ─── PANEL HEADER ─── */
+.panel-header {
+  background: var(--olive-dark);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--sand);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.panel-header::before {
+  content: '▶';
+  color: var(--red-bright);
+  font-size: 8px;
+}
+
+.mode-toggle {
+  font-size: 8px;
+  padding: 2px 6px;
+  background: rgba(74,92,42,0.3);
+  border: 1px solid var(--border);
+  color: var(--olive-light);
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+.mode-toggle:hover { background: rgba(74,92,42,0.6); color: var(--sand); }
+.mode-toggle.active { background: rgba(57,255,20,0.15); border-color: var(--green-hud); color: var(--green-hud); }
+
+/* ─── LEFT PANEL — ROSTER ─── */
+.panel-left {
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.roster {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.roster::-webkit-scrollbar { width: 4px; }
+.roster::-webkit-scrollbar-track { background: transparent; }
+.roster::-webkit-scrollbar-thumb { background: var(--olive); border-radius: 2px; }
+
+.unit-card {
+  background: rgba(74, 92, 42, 0.15);
+  border: 1px solid rgba(74, 92, 42, 0.4);
+  border-radius: 2px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.unit-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--olive-light);
+  transition: background 0.2s;
+}
+
+.unit-card:hover { background: rgba(74, 92, 42, 0.35); border-color: var(--olive-light); }
+.unit-card.active::before { background: var(--green-hud); }
+.unit-card.busy::before { background: var(--amber); }
+.unit-card.waiting::before { background: var(--red-bright); animation: alertFlash 0.8s infinite; }
+.unit-card.idle::before { background: var(--khaki); }
+.unit-card.selected { border-color: var(--sand); background: rgba(200, 169, 110, 0.1); }
+
+.unit-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.unit-sprite { width: 32px; height: 32px; flex-shrink: 0; }
+.unit-info { flex: 1; min-width: 0; }
+.unit-name { font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; color: var(--sand); letter-spacing: 1px; }
+.unit-role { font-size: 9px; color: var(--olive-light); letter-spacing: 2px; text-transform: uppercase; }
+
+.unit-status {
+  font-size: 8px;
+  padding: 2px 6px;
+  border-radius: 1px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.status-active { color: var(--green-hud); border-color: var(--green-hud); background: rgba(57,255,20,0.08); }
+.status-busy { color: var(--amber); border-color: var(--amber); background: rgba(255,179,71,0.08); }
+.status-waiting { color: var(--red-bright); border-color: var(--red-bright); background: rgba(192,57,43,0.08); }
+.status-idle { color: var(--khaki); border-color: var(--khaki); background: transparent; }
+
+.unit-task {
+  font-size: 10px;
+  color: var(--khaki);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.unit-progress { margin-top: 6px; height: 3px; background: rgba(74, 92, 42, 0.3); border-radius: 1px; overflow: hidden; }
+
+.progress-bar {
+  height: 100%;
+  border-radius: 1px;
+  transition: width 0.8s ease-out;
+}
+
+.progress-bar.active { background: var(--green-hud); box-shadow: 0 0 6px var(--green-hud); }
+.progress-bar.busy { background: var(--amber); box-shadow: 0 0 4px var(--amber); }
+.progress-bar.waiting { background: var(--red-bright); }
+.progress-bar.idle { background: var(--khaki); }
+
+/* ─── MAP AREA ─── */
+.map-area {
+  position: relative;
+  overflow: hidden;
+  background: var(--olive-dark);
+  cursor: crosshair;
+}
+
+.map-canvas {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(74,92,42,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,92,42,0.12) 1px, transparent 1px),
+    radial-gradient(ellipse at 30% 40%, rgba(45,58,24,0.8) 0%, rgba(10,12,6,0.95) 70%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
+}
+
+.terrain {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+  transition: opacity 1s;
+}
+
+.map-label {
+  position: absolute;
+  font-family: 'Special Elite', serif;
+  font-size: 9px;
+  color: rgba(200,169,110,0.35);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Agent tokens */
+.agent-token {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.5s ease;
+}
+
+.agent-token:hover { z-index: 20; }
+.agent-token:hover .token-sprite { transform: scale(1.15); }
+
+.token-shadow {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 8px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+.token-sprite {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.token-label {
+  text-align: center;
+  font-size: 8px;
+  color: var(--sand-light);
+  margin-top: 2px;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 3px black, 0 0 8px black;
+  white-space: nowrap;
+}
+
+.token-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--green-hud);
+  animation: pulse 1.5s infinite;
+  opacity: 0;
+}
+
+.token-pulse.active { opacity: 1; border-color: var(--green-hud); }
+.token-pulse.busy { opacity: 1; border-color: var(--amber); animation-duration: 0.8s; }
+.token-pulse.waiting { opacity: 1; border-color: var(--red-bright); animation-duration: 0.5s; }
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Fog patches */
+.fog-patch {
+  position: absolute;
+  background: var(--fog);
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+  transition: opacity 0.6s;
+}
+
+/* Mission markers */
+.mission-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.mission-flag {
+  width: 2px;
+  height: 14px;
+  background: var(--red-bright);
+  position: absolute;
+  left: 0;
+}
+
+.mission-flag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 10px;
+  height: 7px;
+  background: var(--red-bright);
+  clip-path: polygon(0 0, 100% 30%, 0 70%);
+}
+
+/* Selection ring */
+.selection-ring {
+  position: absolute;
+  border: 2px dashed var(--sand);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: rotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s, left 0.5s ease, top 0.5s ease;
+  z-index: 15;
+}
+
+.selection-ring.visible { opacity: 1; }
+
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Map HUD */
+.map-hud {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.hud-badge {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  font-size: 9px;
+  color: var(--olive-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hud-badge.live { border-color: var(--green-hud); color: var(--green-hud); }
+
+.compass {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+
+/* ─── RIGHT PANEL — INTEL ─── */
+.panel-right {
+  background: var(--panel-bg);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mission-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mission-list::-webkit-scrollbar { width: 4px; }
+.mission-list::-webkit-scrollbar-track { background: transparent; }
+.mission-list::-webkit-scrollbar-thumb { background: var(--olive); border-radius: 2px; }
+
+.mission-item {
+  background: rgba(74,92,42,0.1);
+  border: 1px solid rgba(74,92,42,0.3);
+  padding: 8px;
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.mission-item.complete { opacity: 0.5; border-color: rgba(74,92,42,0.15); }
+.mission-item.active { border-color: var(--amber); background: rgba(255,179,71,0.06); }
+.mission-item.waiting { border-color: var(--red-bright); background: rgba(192,57,43,0.05); }
+
+.mission-priority {
+  position: absolute;
+  top: 0; right: 0;
+  font-size: 7px;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.priority-critical { background: var(--red-bright); color: white; }
+.priority-high { background: var(--amber); color: black; }
+.priority-normal { background: var(--olive); color: var(--sand-light); }
+
+.mission-name { font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 600; color: var(--sand); margin-bottom: 3px; padding-right: 50px; }
+.mission-detail { font-size: 9px; color: var(--khaki); line-height: 1.4; }
+.mission-unit { font-size: 9px; color: var(--olive-light); margin-top: 4px; letter-spacing: 1px; }
+
+/* ─── BOTTOM HUD ─── */
+.bottom-hud {
+  grid-column: 1 / -1;
+  background: var(--olive-dark);
+  border-top: 2px solid var(--olive-light);
+  display: grid;
+  grid-template-columns: 280px 1fr 260px;
+  overflow: hidden;
+}
+
+/* Unit detail */
+.hud-unit-detail {
+  border-right: 1px solid var(--border);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-header { display: flex; align-items: center; gap: 10px; }
+.detail-sprite { width: 48px; height: 48px; flex-shrink: 0; }
+.detail-name { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; color: var(--sand); letter-spacing: 2px; }
+.detail-role { font-size: 9px; color: var(--olive-light); letter-spacing: 3px; }
+.detail-task { font-size: 10px; color: var(--khaki); font-style: italic; margin-top: 2px; }
+
+.detail-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.stat {
+  background: rgba(0,0,0,0.3);
+  padding: 4px;
+  text-align: center;
+  border: 1px solid rgba(74,92,42,0.3);
+}
+
+.stat-val { font-size: 14px; color: var(--green-hud); font-weight: bold; }
+.stat-label { font-size: 7px; color: var(--khaki); text-transform: uppercase; letter-spacing: 1px; }
+
+/* Terminal */
+.hud-terminal {
+  padding: 8px 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.terminal-line {
+  font-size: 10px;
+  line-height: 1.6;
+  display: flex;
+  gap: 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tl-time { color: var(--olive-light); flex-shrink: 0; }
+.tl-unit { color: var(--amber); flex-shrink: 0; min-width: 80px; }
+.tl-msg { color: var(--sand-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tl-msg.error { color: var(--red-bright); }
+.tl-msg.success { color: var(--green-hud); }
+
+.terminal-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 11px;
+  background: var(--green-hud);
+  animation: blink 1s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Command grid */
+.hud-commands {
+  border-left: 1px solid var(--border);
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.cmd-btn {
+  background: rgba(74,92,42,0.2);
+  border: 1px solid rgba(74,92,42,0.5);
+  color: var(--sand-light);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  transition: all 0.1s;
+  text-align: center;
+  letter-spacing: 0.5px;
+  border-radius: 1px;
+}
+
+.cmd-btn:hover { background: rgba(74,92,42,0.45); border-color: var(--olive-light); color: var(--sand); }
+.cmd-btn:active { background: rgba(74,92,42,0.7); transform: scale(0.96); }
+
+.cmd-icon { font-size: 14px; line-height: 1; }
+.cmd-key {
+  font-size: 7px;
+  color: var(--olive-light);
+  border: 1px solid var(--olive);
+  padding: 0 3px;
+  border-radius: 1px;
+}
+
+.cmd-btn.danger { border-color: rgba(192,57,43,0.4); }
+.cmd-btn.danger:hover { border-color: var(--red-bright); background: rgba(192,57,43,0.15); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes unitBob {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-3px); }
+}
+
+.agent-token.active-anim { animation: unitBob 2s ease-in-out infinite; }
+
+@keyframes alertFlash {
+  0%, 100% { border-color: var(--red-bright); }
+  50% { border-color: transparent; }
+}
+
+/* ─── EMPTY STATE ─── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  color: var(--olive-light);
+  font-size: 11px;
+  text-align: center;
+  padding: 16px;
+  letter-spacing: 1px;
+}
+
+.empty-state .icon { font-size: 28px; opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="title-block">
+      <span class="title-skull">☠</span>
+      <div>
+        <div class="title-text">Operative HQ</div>
+        <div class="title-sub">
+          <span class="conn-dot disconnected" id="conn-dot"></span>
+          <span id="conn-label">CONNECTING...</span>
+        </div>
+      </div>
+    </div>
+    <div class="topbar-status">
+      <div class="status-item">
+        <span class="status-val" id="stat-active">0</span>
+        <span>ACTIVE</span>
+      </div>
+      <div class="status-item">
+        <span class="status-val" style="color:var(--amber)" id="stat-busy">0</span>
+        <span>BUSY</span>
+      </div>
+      <div class="status-item">
+        <span class="status-val" style="color:var(--red-bright)" id="stat-waiting">0</span>
+        <span>WAITING</span>
+      </div>
+      <div class="status-item">
+        <span class="status-val" id="stat-hooks">0</span>
+        <span>HOOKS</span>
+      </div>
+      <div class="status-item">
+        <span class="status-val" style="color:var(--green-hud)" id="stat-tools">0</span>
+        <span>TOOLS</span>
+      </div>
+    </div>
+    <div class="clock" id="clock">00:00:00</div>
+  </div>
+
+  <!-- LEFT — ROSTER -->
+  <div class="panel-left">
+    <div class="panel-header">
+      <span>Commando Roster</span>
+      <button class="mode-toggle" id="demo-btn" onclick="toggleDemo()">DEMO</button>
+    </div>
+    <div class="roster" id="roster">
+      <div class="empty-state" id="roster-empty">
+        <div class="icon">📡</div>
+        <div>NO AGENTS DETECTED</div>
+        <div style="font-size:9px;color:var(--khaki)">Run Claude Code with hooks installed<br>or press [Q] SPAWN for demo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <div class="map-area" id="map">
+    <div class="map-canvas">
+      <div class="terrain" style="width:180px;height:100px;background:rgba(45,58,24,0.6);top:20%;left:15%;transform:rotate(-15deg);border-radius:40%;"></div>
+      <div class="terrain" style="width:120px;height:80px;background:rgba(45,58,24,0.5);top:55%;left:60%;border-radius:50%;"></div>
+      <div class="terrain" style="width:200px;height:60px;background:rgba(74,60,30,0.3);top:70%;left:10%;transform:rotate(5deg);border-radius:30%;"></div>
+      <div class="terrain" style="width:90px;height:90px;background:rgba(35,48,18,0.7);top:10%;left:70%;border-radius:50%;"></div>
+      <div class="terrain" style="width:140px;height:50px;background:rgba(40,52,20,0.4);top:40%;left:42%;transform:rotate(-8deg);border-radius:45%;"></div>
+
+      <div class="map-label" style="top:22%;left:16%;">Dense Forest</div>
+      <div class="map-label" style="top:57%;left:61%;">Checkpoint</div>
+      <div class="map-label" style="top:72%;left:11%;">Enemy Camp</div>
+      <div class="map-label" style="top:12%;left:71%;">Watchtower</div>
+      <div class="map-label" style="top:42%;left:43%;">HQ Zone</div>
+
+      <div class="mission-marker" style="top:35%;left:45%;">
+        <div class="mission-flag"></div>
+      </div>
+      <div class="mission-marker" style="top:60%;left:25%;">
+        <div class="mission-flag" style="background:var(--amber);"></div>
+      </div>
+    </div>
+
+    <div class="map-hud">
+      <div class="hud-badge" id="sector-badge">▣ SECTOR 7-G</div>
+      <div class="hud-badge" id="mode-badge">⏸ STANDBY</div>
+    </div>
+
+    <svg class="compass" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="22" stroke="rgba(74,92,42,0.6)" stroke-width="1"/>
+      <circle cx="24" cy="24" r="18" stroke="rgba(74,92,42,0.3)" stroke-width="1" stroke-dasharray="3 5"/>
+      <polygon points="24,6 27,22 24,20 21,22" fill="#c0392b"/>
+      <polygon points="24,42 21,26 24,28 27,26" fill="rgba(200,169,110,0.6)"/>
+      <text x="24" y="4" text-anchor="middle" fill="rgba(200,169,110,0.8)" font-size="6" font-family="Oswald">N</text>
+      <text x="44" y="26" text-anchor="middle" fill="rgba(200,169,110,0.5)" font-size="6" font-family="Oswald">E</text>
+      <text x="4" y="26" text-anchor="middle" fill="rgba(200,169,110,0.5)" font-size="6" font-family="Oswald">W</text>
+      <text x="24" y="46" text-anchor="middle" fill="rgba(200,169,110,0.5)" font-size="6" font-family="Oswald">S</text>
+      <circle cx="24" cy="24" r="2" fill="rgba(200,169,110,0.8)"/>
+    </svg>
+
+    <div id="agent-tokens"></div>
+
+    <div class="fog-patch" style="top:0;left:0;width:25%;height:30%;border-radius:0 0 80% 0;"></div>
+    <div class="fog-patch" style="bottom:0;right:0;width:30%;height:25%;border-radius:80% 0 0 0;"></div>
+
+    <div class="selection-ring" id="selection-ring"></div>
+  </div>
+
+  <!-- RIGHT — INTEL -->
+  <div class="panel-right">
+    <div class="panel-header">Mission Intel</div>
+    <div class="mission-list" id="mission-list"></div>
+  </div>
+
+  <!-- BOTTOM HUD -->
+  <div class="bottom-hud">
+    <div class="hud-unit-detail" id="unit-detail">
+      <div class="detail-header">
+        <svg class="detail-sprite" id="detail-sprite" viewBox="0 0 48 48"></svg>
+        <div>
+          <div class="detail-name" id="detail-name">SELECT UNIT</div>
+          <div class="detail-role" id="detail-role">— NO UNIT SELECTED —</div>
+          <div class="detail-task" id="detail-task"></div>
+        </div>
+      </div>
+      <div class="detail-stats">
+        <div class="stat"><div class="stat-val" id="d-tasks">—</div><div class="stat-label">Tasks</div></div>
+        <div class="stat"><div class="stat-val" id="d-done">—</div><div class="stat-label">Done</div></div>
+        <div class="stat"><div class="stat-val" id="d-tokens">—</div><div class="stat-label">Tokens</div></div>
+        <div class="stat"><div class="stat-val" id="d-uptime">—</div><div class="stat-label">Uptime</div></div>
+      </div>
+    </div>
+
+    <div class="hud-terminal" id="terminal"></div>
+
+    <div class="hud-commands">
+      <button class="cmd-btn" onclick="spawnAgent()"><span class="cmd-icon">⊕</span><span>SPAWN</span><span class="cmd-key">Q</span></button>
+      <button class="cmd-btn" onclick="sendOrder()"><span class="cmd-icon">📡</span><span>ORDER</span><span class="cmd-key">W</span></button>
+      <button class="cmd-btn" onclick="toggleFog()"><span class="cmd-icon">◌</span><span>FOG</span><span class="cmd-key">V</span></button>
+      <button class="cmd-btn" onclick="groupAll()"><span class="cmd-icon">◈</span><span>GROUP</span><span class="cmd-key">G</span></button>
+      <button class="cmd-btn" onclick="pauseAgent()"><span class="cmd-icon">⏸</span><span>PAUSE</span><span class="cmd-key">P</span></button>
+      <button class="cmd-btn" onclick="resumeAgent()"><span class="cmd-icon">▶</span><span>RESUME</span><span class="cmd-key">R</span></button>
+      <button class="cmd-btn" onclick="viewLog()"><span class="cmd-icon">📋</span><span>LOG</span><span class="cmd-key">L</span></button>
+      <button class="cmd-btn" onclick="addMission()"><span class="cmd-icon">⚑</span><span>MISSION</span><span class="cmd-key">M</span></button>
+      <button class="cmd-btn" onclick="worktree()"><span class="cmd-icon">⎇</span><span>BRANCH</span><span class="cmd-key">B</span></button>
+      <button class="cmd-btn" onclick="openTerminal()"><span class="cmd-icon">⬛</span><span>TERM</span><span class="cmd-key">F</span></button>
+      <button class="cmd-btn danger" onclick="abortAgent()"><span class="cmd-icon">✕</span><span>ABORT</span><span class="cmd-key">X</span></button>
+      <button class="cmd-btn danger" onclick="extractAll()"><span class="cmd-icon">☠</span><span>EXTRACT</span><span class="cmd-key">E</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+// OPERATIVE HQ — Dashboard Engine
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+
+let UNITS = [];
+let MISSIONS = [];
+let LOG = [];
+let selectedUnit = null;
+let fogVisible = true;
+let wsConnected = false;
+let demoMode = false;
+let ws = null;
+let reconnectTimer = null;
+let stats = { totalHookEvents: 0, totalToolCalls: 0 };
+
+// ─── DEMO DATA ──────────────────────────────────────────────────────────────
+
+const DEMO_UNITS = [
+  { id: 'demo-gb', name: 'GREEN BERET', role: 'Lead Operative', spriteId: 'green-beret', agentType: 'Claude Code', status: 'active', task: 'Building Supabase schema for booking system...', progress: 72, mapX: 38, mapY: 42, tasks: 14, done: 9, tokens: 42000, startTime: Date.now() - 8040000, lastActivity: Date.now(), color: '#3a5a2a', helmet: '#c8a96e', skin: '#c8a96e' },
+  { id: 'demo-sn', name: 'SNIPER', role: 'Code Analyst', spriteId: 'sniper', agentType: 'Claude Code', status: 'active', task: 'Reviewing GDD architecture gaps...', progress: 45, mapX: 68, mapY: 28, tasks: 8, done: 5, tokens: 18000, startTime: Date.now() - 3720000, lastActivity: Date.now(), color: '#2a3a1a', helmet: '#8a8a6a', skin: '#d4aa70' },
+  { id: 'demo-sa', name: 'SAPPER', role: 'Systems Engineer', spriteId: 'sapper', agentType: 'Claude Code', status: 'busy', task: 'Franchise.OS attendance tracker schema...', progress: 88, mapX: 22, mapY: 65, tasks: 11, done: 8, tokens: 31000, startTime: Date.now() - 13500000, lastActivity: Date.now(), color: '#5a4a2a', helmet: '#aaaaaa', skin: '#c8a96e' },
+  { id: 'demo-sp', name: 'SPY', role: 'Researcher', spriteId: 'spy', agentType: 'Claude Code', status: 'active', task: 'Scouting AgentCraft hook architecture...', progress: 30, mapX: 55, mapY: 58, tasks: 6, done: 2, tokens: 9000, startTime: Date.now() - 1320000, lastActivity: Date.now(), color: '#1a1a1a', helmet: '#1a1a1a', skin: '#c8a96e' },
+  { id: 'demo-dr', name: 'DRIVER', role: 'DevOps', spriteId: 'driver', agentType: 'Claude Code', status: 'busy', task: 'Vercel deployment pipeline config...', progress: 55, mapX: 78, mapY: 72, tasks: 5, done: 3, tokens: 12000, startTime: Date.now() - 3300000, lastActivity: Date.now(), color: '#4a3a1a', helmet: '#c0c0c0', skin: '#d4aa70' },
+  { id: 'demo-ma', name: 'MARINE', role: 'UI Engineer', spriteId: 'marine', agentType: 'Claude Code', status: 'waiting', task: 'AWAITING INPUT — component review needed', progress: 0, mapX: 45, mapY: 78, tasks: 7, done: 4, tokens: 22000, startTime: Date.now() - 5400000, lastActivity: Date.now(), color: '#1a3a4a', helmet: '#8ab4c0', skin: '#c8a96e' },
+];
+
+const DEMO_MISSIONS = [
+  { name: 'BOOKING SITE SCHEMA', detail: 'Design and implement Supabase tables for multi-tenant booking.', unit: 'GREEN BERET', priority: 'critical', status: 'active' },
+  { name: 'SAMURAI CITY GDD GAPS', detail: 'Close 30 identified gaps in GDD v2.0.', unit: 'SNIPER', priority: 'high', status: 'active' },
+  { name: 'SNAP REPORT AUTOMATION', detail: 'Build attendance → SNAP report pipeline in Franchise.OS.', unit: 'SAPPER', priority: 'critical', status: 'active' },
+  { name: 'AGENTCRAFT HOOK ANALYSIS', detail: 'Study hook architecture for Claude Code integration.', unit: 'SPY', priority: 'high', status: 'active' },
+  { name: 'VERCEL PIPELINE', detail: 'Configure Vercel deployment for booking site.', unit: 'DRIVER', priority: 'normal', status: 'active' },
+  { name: 'LEVEL 10 UI COMPONENTS', detail: 'Build EOS Level 10 meeting interface. Blocked on design review.', unit: 'MARINE', priority: 'high', status: 'waiting' },
+];
+
+const DEMO_LOG = [
+  { time: '14:22:08', unit: 'GREEN-BERET', msg: 'Schema tables created: locations, classes, bookings', type: 'success' },
+  { time: '14:19:44', unit: 'SAPPER', msg: 'attendance_records table — 12 columns defined', type: '' },
+  { time: '14:17:31', unit: 'MARINE', msg: 'BLOCKED — awaiting component design sign-off', type: 'error' },
+  { time: '14:15:09', unit: 'SPY', msg: 'AgentCraft hooks fire on: task_start, tool_use, complete', type: '' },
+  { time: '14:11:22', unit: 'SNIPER', msg: 'Gap 17 of 30 closed — EVENT BUS spec added to GDD', type: 'success' },
+  { time: '14:08:03', unit: 'DRIVER', msg: 'Vercel env variables synced to preview deployment', type: 'success' },
+  { time: '14:03:47', unit: 'SYSTEM', msg: 'Commandos HQ initialized — 6 agents online', type: 'success' },
+];
+
+// ─── SVG SPRITES ────────────────────────────────────────────────────────────
+
+function drawSprite(unit, size = 40) {
+  const c = unit.color;
+  const h = unit.helmet || unit.helmetColor;
+  const s = unit.skin || unit.skinColor;
+  const id = unit.spriteId || unit.id;
+
+  const sprites = {
+    'green-beret': `<rect x="14" y="8" width="12" height="4" fill="${h}" rx="2"/><rect x="12" y="10" width="16" height="8" fill="${h}" rx="3"/><circle cx="20" cy="18" r="5" fill="${s}"/><rect x="15" y="22" width="10" height="12" fill="${c}"/><rect x="13" y="22" width="5" height="10" fill="${c}"/><rect x="22" y="22" width="5" height="10" fill="${c}"/><rect x="15" y="33" width="4" height="7" fill="${c}"/><rect x="21" y="33" width="4" height="7" fill="${c}"/><rect x="16" y="24" width="8" height="2" fill="rgba(255,255,255,0.15)"/>`,
+    'sniper': `<rect x="13" y="8" width="14" height="5" fill="${h}" rx="1"/><rect x="15" y="6" width="10" height="4" fill="${h}" rx="1"/><circle cx="20" cy="18" r="5" fill="${s}"/><rect x="15" y="22" width="10" height="12" fill="${c}"/><rect x="12" y="22" width="5" height="9" fill="${c}"/><rect x="23" y="22" width="7" height="4" fill="#5a4a2a"/><rect x="15" y="33" width="4" height="7" fill="${c}"/><rect x="21" y="33" width="4" height="7" fill="${c}"/>`,
+    'sapper': `<ellipse cx="20" cy="12" rx="7" ry="6" fill="${h}"/><circle cx="20" cy="18" r="5" fill="${s}"/><rect x="15" y="22" width="10" height="12" fill="${c}"/><rect x="13" y="24" width="4" height="8" fill="${c}"/><rect x="23" y="24" width="4" height="8" fill="${c}"/><rect x="15" y="33" width="4" height="7" fill="${c}"/><rect x="21" y="33" width="4" height="7" fill="${c}"/><rect x="17" y="26" width="6" height="4" fill="#aaaaaa" rx="1"/>`,
+    'spy': `<rect x="14" y="8" width="12" height="8" fill="#1a1a1a" rx="2"/><circle cx="20" cy="18" r="5" fill="${s}"/><rect x="15" y="22" width="10" height="12" fill="#2a2a2a"/><rect x="13" y="22" width="5" height="10" fill="#2a2a2a"/><rect x="22" y="22" width="5" height="10" fill="#2a2a2a"/><rect x="15" y="33" width="4" height="7" fill="#1a1a1a"/><rect x="21" y="33" width="4" height="7" fill="#1a1a1a"/><rect x="18" y="22" width="4" height="10" fill="#3a3a3a"/>`,
+    'driver': `<rect x="13" y="10" width="14" height="6" fill="${h}" rx="1"/><rect x="15" y="8" width="10" height="4" fill="#8a8a6a" rx="1"/><circle cx="20" cy="18" r="5" fill="${s}"/><rect x="15" y="22" width="10" height="12" fill="${c}"/><rect x="13" y="22" width="5" height="10" fill="${c}"/><rect x="22" y="22" width="5" height="10" fill="${c}"/><rect x="15" y="33" width="4" height="7" fill="${c}"/><rect x="21" y="33" width="4" height="7" fill="${c}"/><circle cx="20" cy="24" r="2" fill="rgba(255,255,255,0.2)"/>`,
+    'marine': `<ellipse cx="20" cy="11" rx="8" ry="5" fill="${h}"/><rect x="13" y="13" width="14" height="3" fill="${h}"/><circle cx="20" cy="18" r="5" fill="${s}"/><rect x="15" y="22" width="10" height="12" fill="${c}"/><rect x="12" y="22" width="5" height="10" fill="${c}"/><rect x="23" y="22" width="5" height="10" fill="${c}"/><rect x="15" y="33" width="4" height="7" fill="${c}"/><rect x="21" y="33" width="4" height="7" fill="${c}"/><rect x="14" y="28" width="12" height="2" fill="rgba(138,180,192,0.4)"/>`,
+  };
+
+  const body = sprites[id] || sprites['green-beret'];
+  return `<svg viewBox="0 0 40 40" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">${body}</svg>`;
+}
+
+// ─── FORMAT HELPERS ─────────────────────────────────────────────────────────
+
+function fmtTokens(n) {
+  if (typeof n !== 'number') return n;
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(0) + 'k';
+  return String(n);
+}
+
+function fmtUptime(startTime) {
+  if (!startTime) return '—';
+  const ms = Date.now() - startTime;
+  const mins = Math.floor(ms / 60000);
+  const hrs = Math.floor(mins / 60);
+  if (hrs > 0) return `${hrs}h${String(mins % 60).padStart(2,'0')}m`;
+  return `${mins}m`;
+}
+
+function timeNow() {
+  const now = new Date();
+  return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+}
+
+// ─── RENDER ─────────────────────────────────────────────────────────────────
+
+function renderAll() {
+  renderRoster();
+  renderMissions();
+  renderTokens();
+  renderTerminal();
+  updateStats();
+}
+
+function renderRoster() {
+  const roster = document.getElementById('roster');
+  const empty = document.getElementById('roster-empty');
+
+  if (UNITS.length === 0) {
+    if (empty) empty.style.display = 'flex';
+    roster.querySelectorAll('.unit-card').forEach(c => c.remove());
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+
+  // Rebuild
+  const existingCards = roster.querySelectorAll('.unit-card');
+  existingCards.forEach(c => c.remove());
+
+  UNITS.forEach(unit => {
+    const card = document.createElement('div');
+    card.className = `unit-card ${unit.status} ${unit.id === selectedUnit?.id ? 'selected' : ''}`;
+    card.innerHTML = `
+      <div class="unit-header">
+        ${drawSprite(unit, 32)}
+        <div class="unit-info">
+          <div class="unit-name">${unit.name}</div>
+          <div class="unit-role">${unit.role}</div>
+        </div>
+        <div class="unit-status status-${unit.status}">${unit.status}</div>
+      </div>
+      <div class="unit-task">${unit.task || '—'}</div>
+      <div class="unit-progress">
+        <div class="progress-bar ${unit.status}" style="width:${unit.progress}%"></div>
+      </div>
+    `;
+    card.addEventListener('click', () => selectUnit(unit));
+    roster.appendChild(card);
+  });
+}
+
+function renderMissions() {
+  const list = document.getElementById('mission-list');
+  list.innerHTML = '';
+  if (MISSIONS.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="icon">⚑</div><div>NO ACTIVE MISSIONS</div></div>';
+    return;
+  }
+  MISSIONS.forEach(m => {
+    const item = document.createElement('div');
+    item.className = `mission-item ${m.status}`;
+    item.innerHTML = `
+      <div class="mission-priority priority-${m.priority}">${m.priority}</div>
+      <div class="mission-name">${m.name}</div>
+      <div class="mission-detail">${m.detail}</div>
+      <div class="mission-unit">▶ ${m.unit}</div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function renderTokens() {
+  const container = document.getElementById('agent-tokens');
+  container.innerHTML = '';
+  UNITS.forEach(unit => {
+    const token = document.createElement('div');
+    const isActive = unit.status === 'active' || unit.status === 'busy';
+    token.className = `agent-token ${isActive ? 'active-anim' : ''}`;
+    token.style.left = `${unit.mapX}%`;
+    token.style.top = `${unit.mapY}%`;
+    token.id = `token-${unit.id}`;
+    token.innerHTML = `
+      <div class="token-shadow"></div>
+      <div class="token-sprite">${drawSprite(unit, 40)}</div>
+      <div class="token-label">${unit.name}</div>
+      <div class="token-pulse ${unit.status}"></div>
+    `;
+    token.addEventListener('click', () => selectUnit(unit));
+    container.appendChild(token);
+  });
+}
+
+function renderTerminal() {
+  const term = document.getElementById('terminal');
+  const lines = LOG.slice(0, 8);
+  term.innerHTML = lines.map(l => `
+    <div class="terminal-line">
+      <span class="tl-time">[${l.time}]</span>
+      <span class="tl-unit">${l.unit}</span>
+      <span class="tl-msg ${l.type || ''}">${l.msg}</span>
+    </div>
+  `).join('') + `<div class="terminal-line"><span class="tl-time">></span><span class="terminal-cursor"></span></div>`;
+}
+
+function updateStats() {
+  const active = UNITS.filter(u => u.status === 'active').length;
+  const busy = UNITS.filter(u => u.status === 'busy').length;
+  const waiting = UNITS.filter(u => u.status === 'waiting').length;
+  document.getElementById('stat-active').textContent = active;
+  document.getElementById('stat-busy').textContent = busy;
+  document.getElementById('stat-waiting').textContent = waiting;
+  document.getElementById('stat-hooks').textContent = stats.totalHookEvents || UNITS.reduce((a, u) => a + (u.tasks || 0), 0);
+  document.getElementById('stat-tools').textContent = stats.totalToolCalls || UNITS.reduce((a, u) => a + (u.done || 0), 0);
+
+  // Mode badge
+  const modeBadge = document.getElementById('mode-badge');
+  if (UNITS.length > 0) {
+    modeBadge.textContent = `⚡ ${UNITS.length} OPERATIVE${UNITS.length > 1 ? 'S' : ''} DEPLOYED`;
+    modeBadge.classList.add('live');
+  } else {
+    modeBadge.textContent = '⏸ STANDBY';
+    modeBadge.classList.remove('live');
+  }
+}
+
+function selectUnit(unit) {
+  selectedUnit = unit;
+  renderRoster();
+
+  document.getElementById('detail-name').textContent = unit.name;
+  document.getElementById('detail-role').textContent = unit.role + ' — ' + (unit.agentType || 'Claude Code');
+  document.getElementById('detail-task').textContent = unit.task || '';
+  document.getElementById('detail-sprite').innerHTML = drawSprite(unit, 48).replace(/<svg[^>]*>/, '').replace('</svg>', '');
+  document.getElementById('d-tasks').textContent = unit.tasks || 0;
+  document.getElementById('d-done').textContent = unit.done || 0;
+  document.getElementById('d-tokens').textContent = fmtTokens(unit.tokens || 0);
+  document.getElementById('d-uptime').textContent = fmtUptime(unit.startTime);
+
+  const ring = document.getElementById('selection-ring');
+  ring.style.left = unit.mapX + '%';
+  ring.style.top = unit.mapY + '%';
+  ring.classList.add('visible');
+}
+
+// ─── WEBSOCKET ──────────────────────────────────────────────────────────────
+
+function connectWS() {
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  ws = new WebSocket(`${proto}//${location.host}/ws`);
+
+  ws.onopen = () => {
+    wsConnected = true;
+    updateConnStatus('connected', 'LIVE — SERVER CONNECTED');
+    if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+  };
+
+  ws.onmessage = (e) => {
+    try {
+      const msg = JSON.parse(e.data);
+      if (msg.type === 'init' || msg.type === 'update') {
+        applyServerState(msg.state);
+      }
+    } catch (err) { /* ignore */ }
+  };
+
+  ws.onclose = () => {
+    wsConnected = false;
+    updateConnStatus('disconnected', 'DISCONNECTED — RECONNECTING...');
+    reconnectTimer = setTimeout(connectWS, 3000);
+  };
+
+  ws.onerror = () => {
+    ws.close();
+  };
+}
+
+function applyServerState(serverState) {
+  if (!serverState) return;
+  if (demoMode) return; // Don't overwrite demo mode
+
+  UNITS = serverState.sessions || [];
+  MISSIONS = serverState.missions || MISSIONS;
+  if (serverState.log && serverState.log.length > 0) {
+    LOG = serverState.log;
+  }
+  if (serverState.stats) {
+    stats = serverState.stats;
+  }
+
+  // Re-select if unit still exists
+  if (selectedUnit) {
+    const fresh = UNITS.find(u => u.id === selectedUnit.id);
+    if (fresh) selectedUnit = fresh;
+    else { selectedUnit = null; document.getElementById('selection-ring').classList.remove('visible'); }
+  }
+
+  renderAll();
+}
+
+function wsSend(data) {
+  if (ws && ws.readyState === 1) {
+    ws.send(JSON.stringify(data));
+  }
+}
+
+function updateConnStatus(status, label) {
+  const dot = document.getElementById('conn-dot');
+  const lbl = document.getElementById('conn-label');
+  dot.className = `conn-dot ${status}`;
+  lbl.textContent = label;
+}
+
+// ─── DEMO MODE ──────────────────────────────────────────────────────────────
+
+function toggleDemo() {
+  demoMode = !demoMode;
+  const btn = document.getElementById('demo-btn');
+
+  if (demoMode) {
+    btn.classList.add('active');
+    btn.textContent = 'LIVE';
+    UNITS = JSON.parse(JSON.stringify(DEMO_UNITS));
+    MISSIONS = JSON.parse(JSON.stringify(DEMO_MISSIONS));
+    LOG = JSON.parse(JSON.stringify(DEMO_LOG));
+    updateConnStatus('demo', 'DEMO MODE — SIMULATED DATA');
+    renderAll();
+    selectUnit(UNITS[0]);
+    startDemoSim();
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = 'DEMO';
+    UNITS = [];
+    MISSIONS = [];
+    LOG = [];
+    selectedUnit = null;
+    document.getElementById('selection-ring').classList.remove('visible');
+    stopDemoSim();
+    if (wsConnected) {
+      updateConnStatus('connected', 'LIVE — SERVER CONNECTED');
+      // Request fresh state
+      wsSend({ command: 'refresh' });
+    } else {
+      updateConnStatus('disconnected', 'DISCONNECTED');
+    }
+    renderAll();
+  }
+}
+
+let demoInterval = null;
+
+function startDemoSim() {
+  demoInterval = setInterval(() => {
+    UNITS.forEach(u => {
+      if (u.status === 'active' && u.progress < 100) {
+        u.progress = Math.min(100, u.progress + (Math.random() * 0.8));
+        if (u.progress >= 100) {
+          u.status = 'idle';
+          u.task = 'Task complete — awaiting next order';
+          u.done++;
+          addLocalLog(u.name, `Task complete (${u.done}/${u.tasks})`, 'success');
+        }
+      }
+      if (u.status === 'busy' && u.progress < 100) {
+        u.progress = Math.min(100, u.progress + (Math.random() * 0.5));
+      }
+    });
+    renderRoster();
+    if (selectedUnit) {
+      const fresh = UNITS.find(u => u.id === selectedUnit.id);
+      if (fresh) {
+        document.getElementById('d-done').textContent = fresh.done || 0;
+        document.getElementById('d-uptime').textContent = fmtUptime(fresh.startTime);
+        document.getElementById('detail-task').textContent = fresh.task || '';
+      }
+    }
+  }, 2000);
+}
+
+function stopDemoSim() {
+  if (demoInterval) { clearInterval(demoInterval); demoInterval = null; }
+}
+
+// ─── LOCAL LOG ──────────────────────────────────────────────────────────────
+
+function addLocalLog(unit, msg, type = '') {
+  LOG.unshift({ time: timeNow(), unit: unit || 'COMMAND', msg, type });
+  if (LOG.length > 100) LOG.length = 100;
+  renderTerminal();
+}
+
+// ─── COMMAND BUTTONS ────────────────────────────────────────────────────────
+
+function spawnAgent() {
+  const name = prompt('Agent codename:') || 'OPERATIVE';
+  if (wsConnected && !demoMode) {
+    wsSend({ command: 'spawn', name });
+  } else {
+    const spriteIds = ['green-beret', 'sniper', 'sapper', 'spy', 'driver', 'marine'];
+    const idx = UNITS.length % spriteIds.length;
+    const colors = [
+      { color: '#3a5a2a', helmet: '#c8a96e', skin: '#c8a96e' },
+      { color: '#2a3a1a', helmet: '#8a8a6a', skin: '#d4aa70' },
+      { color: '#5a4a2a', helmet: '#aaaaaa', skin: '#c8a96e' },
+      { color: '#1a1a1a', helmet: '#1a1a1a', skin: '#c8a96e' },
+      { color: '#4a3a1a', helmet: '#c0c0c0', skin: '#d4aa70' },
+      { color: '#1a3a4a', helmet: '#8ab4c0', skin: '#c8a96e' },
+    ];
+    const newUnit = {
+      id: 'local-' + Date.now(),
+      name: name.toUpperCase(),
+      role: 'Field Agent',
+      spriteId: spriteIds[idx],
+      agentType: 'Claude Code',
+      status: 'active',
+      task: 'Awaiting orders...',
+      progress: 0,
+      mapX: 15 + Math.random() * 70,
+      mapY: 15 + Math.random() * 70,
+      tasks: 0, done: 0, tokens: 0,
+      startTime: Date.now(),
+      ...colors[idx],
+    };
+    UNITS.push(newUnit);
+    addLocalLog(newUnit.name, `Deployed to field — ${newUnit.role}`, 'success');
+    renderAll();
+  }
+}
+
+function sendOrder() {
+  if (!selectedUnit) { addLocalLog('COMMAND', 'ERROR: No unit selected', 'error'); return; }
+  const order = prompt(`Order for ${selectedUnit.name}:`);
+  if (order) {
+    selectedUnit.task = order;
+    selectedUnit.status = 'active';
+    selectedUnit.progress = 5;
+    addLocalLog(selectedUnit.name, `ORDER: ${order.slice(0, 50)}`, '');
+    renderAll();
+  }
+}
+
+function toggleFog() {
+  fogVisible = !fogVisible;
+  document.querySelectorAll('.fog-patch').forEach(f => { f.style.opacity = fogVisible ? '1' : '0'; });
+  addLocalLog('COMMAND', fogVisible ? 'FOG OF WAR: Enabled' : 'FOG OF WAR: Disabled', '');
+}
+
+function groupAll() { addLocalLog('COMMAND', 'All operatives assembled', 'success'); }
+
+function pauseAgent() {
+  if (!selectedUnit) { addLocalLog('COMMAND', 'ERROR: No unit selected', 'error'); return; }
+  if (wsConnected && !demoMode) {
+    wsSend({ command: 'pause', session: selectedUnit.id });
+  } else {
+    selectedUnit.status = 'idle';
+  }
+  addLocalLog(selectedUnit.name, 'Standing by', '');
+  renderAll();
+}
+
+function resumeAgent() {
+  if (!selectedUnit) { addLocalLog('COMMAND', 'ERROR: No unit selected', 'error'); return; }
+  if (wsConnected && !demoMode) {
+    wsSend({ command: 'resume', session: selectedUnit.id });
+  } else {
+    selectedUnit.status = 'active';
+  }
+  addLocalLog(selectedUnit.name, 'Re-engaged', 'success');
+  renderAll();
+}
+
+function viewLog() { addLocalLog('COMMAND', 'Viewing full mission log...', ''); }
+
+function addMission() {
+  const name = prompt('Mission name:');
+  if (name) {
+    MISSIONS.unshift({ name: name.toUpperCase(), detail: 'New mission — awaiting intel.', unit: selectedUnit?.name || '—', priority: 'normal', status: 'active' });
+    addLocalLog('COMMAND', `MISSION added: ${name}`, 'success');
+    renderAll();
+  }
+}
+
+function worktree() { addLocalLog('COMMAND', 'Opening worktree picker...', ''); }
+function openTerminal() { addLocalLog('COMMAND', 'Launching integrated shell...', ''); }
+
+function abortAgent() {
+  if (!selectedUnit) { addLocalLog('COMMAND', 'ERROR: No unit selected', 'error'); return; }
+  if (confirm(`ABORT ${selectedUnit.name}? This will terminate the agent session.`)) {
+    const name = selectedUnit.name;
+    if (wsConnected && !demoMode) {
+      wsSend({ command: 'abort', session: selectedUnit.id });
+    }
+    const idx = UNITS.findIndex(u => u.id === selectedUnit.id);
+    if (idx > -1) UNITS.splice(idx, 1);
+    selectedUnit = null;
+    document.getElementById('selection-ring').classList.remove('visible');
+    addLocalLog(name, 'Session terminated', 'error');
+    renderAll();
+  }
+}
+
+function extractAll() {
+  if (confirm('EXTRACT ALL? This will terminate all agent sessions.')) {
+    UNITS.length = 0;
+    selectedUnit = null;
+    document.getElementById('selection-ring').classList.remove('visible');
+    addLocalLog('COMMAND', 'All operatives recalled. Mission complete.', 'success');
+    renderAll();
+  }
+}
+
+// ─── KEYBOARD ───────────────────────────────────────────────────────────────
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  switch(e.key.toLowerCase()) {
+    case 'q': spawnAgent(); break;
+    case 'w': sendOrder(); break;
+    case 'v': toggleFog(); break;
+    case 'g': groupAll(); break;
+    case 'p': pauseAgent(); break;
+    case 'r': resumeAgent(); break;
+    case 'l': viewLog(); break;
+    case 'm': addMission(); break;
+    case 'b': worktree(); break;
+    case 'f': openTerminal(); break;
+    case 'x': abortAgent(); break;
+    case 'e': if(e.shiftKey) extractAll(); break;
+    case 'd': toggleDemo(); break;
+  }
+});
+
+// ─── CLOCK ──────────────────────────────────────────────────────────────────
+
+function updateClock() {
+  document.getElementById('clock').textContent = timeNow();
+}
+
+// ─── INIT ───────────────────────────────────────────────────────────────────
+
+renderAll();
+updateClock();
+setInterval(updateClock, 1000);
+connectWS();
+</script>
+</body>
+</html>

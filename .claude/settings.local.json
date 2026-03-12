@@ -34,7 +34,10 @@
       "Bash(git push origin master)",
       "mcp__claude_ai_Vercel__list_deployments",
       "Bash(__NEW_LINE_c565e43af0bbcb06__ ANON_KEY=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnZ3Vjc3R0aWhveGh4YWFlaXBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMDIwNjcsImV4cCI6MjA4ODU3ODA2N30.EAHDdaaL7VmEACVje2InJWpObQd7FAcpet0sSeFduAc\" BASE=\"https://eggucsttihoxhxaaeiph.supabase.co/rest/v1\" BRAND_ID=\"9978b823-dcb0-4bc9-b516-2e73d33346c7\" __NEW_LINE_c565e43af0bbcb06__ echo \"=== Checking Dallas Demo Data in Supabase ===\" echo \"\" __NEW_LINE_c565e43af0bbcb06__ echo \"Territories:\" curl -s \"$BASE/territories?select=id&brand_id=eq.$BRAND_ID\" -H \"apikey: $ANON_KEY\" -H \"Authorization: Bearer $ANON_KEY\" -H \"Prefer: count=exact\")",
-      "Read(//c/Users/jeff/franchise-os/$BASE/**)"
+      "Read(//c/Users/jeff/franchise-os/$BASE/**)",
+      "Bash(find /c/Users/jeff/franchise-os/swarm -name \"*.md\" -type f 2>/dev/null | head -20)",
+      "Bash(find /c/Users/jeff/franchise-os -name \"*.ts\" -o -name \"*.tsx\" | xargs grep -l \"sendAlert\\\\|sendAgentUpdate\\\\|sendOpportunityAlert\" 2>/dev/null)",
+      "Bash(find /c/Users/jeff/franchise-os/swarm/agents -name \"*.md\" -exec basename {} \\\\; | sort)"
     ]
   }
 }

@@ -12,6 +12,8 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import * as fs from "fs";
 import * as path from "path";
+import { executeAgent, targetAgentToSlug } from "../swarm/agent-executor";
+import type { DispatchRule as ExecutorDispatchRule } from "../swarm/agent-executor";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -191,35 +193,46 @@ async function processEvent(
 
   // Dispatch to each matching rule/agent
   for (const rule of matchingRules) {
-    const agent = agents.find(
-      (a) =>
-        a.name.toUpperCase().replace(/\s+/g, "_") + "_AGENT" ===
-        rule.target_agent
-    );
-
+    const agentSlug = targetAgentToSlug(rule.target_agent);
     const timestamp = new Date().toISOString();
-    const agentLabel = agent?.name ?? rule.target_agent;
-    const modelTier = rule.model_tier;
 
     console.log(
-      `[${timestamp}] Dispatching ${event.event_type} → ${agentLabel} (${modelTier})`
+      `[${timestamp}] Dispatching ${event.event_type} → ${agentSlug} (${rule.model_tier})`
     );
 
-    // In a full implementation, this would invoke the agent's execution
-    // pipeline. For now we log the dispatch and record it.
-  }
+    try {
+      const result = await executeAgent(
+        {
+          id: event.id,
+          brand_id: event.brand_id,
+          agent_name: agentSlug,
+          event_type: event.event_type,
+          correlation_id: (event as any).correlation_id ?? event.id,
+          chain_depth: (event as any).chain_depth ?? 0,
+          payload: event.payload,
+          status: event.status,
+        },
+        rule as ExecutorDispatchRule,
+      );
 
-  // Mark event as completed
-  const { error: completeError } = await supabase
-    .from("agent_events")
-    .update({ status: "completed", completed_at: new Date().toISOString() })
-    .eq("id", event.id);
-
-  if (completeError) {
-    console.error(
-      `[swarm] Failed to mark event ${event.id} as completed:`,
-      completeError.message
-    );
+      if (result.error) {
+        console.error(`[swarm] Agent ${agentSlug} returned error: ${result.error}`);
+      } else {
+        console.log(
+          `[swarm] Agent ${agentSlug} completed in ${result.durationMs}ms` +
+          (result.emittedEvents.length > 0
+            ? ` — emitted ${result.emittedEvents.length} downstream event(s)`
+            : '')
+        );
+      }
+    } catch (err: any) {
+      console.error(`[swarm] Fatal error executing ${agentSlug}: ${err.message}`);
+      // Mark event as error and continue with next rule
+      await supabase
+        .from("agent_events")
+        .update({ status: "error", error: err.message })
+        .eq("id", event.id);
+    }
   }
 }
 
